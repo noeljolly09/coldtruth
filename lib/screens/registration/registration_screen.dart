@@ -138,8 +138,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: _domainController.text.isNotEmpty ||
-                                isPageChanged == 0
+                        onPressed: _domainController.text.isNotEmpty
                             ? () {
                                 if (_domainController.text.isEmpty ||
                                     _fnameController.text.isEmpty ||

@@ -12,7 +12,7 @@ class _IncidentsPageState extends State<IncidentsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: const Center(child: Text("Settings Page")),
+      body: const Center(child: Text("Incidents Page")),
     );
   }
 }

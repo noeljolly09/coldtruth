@@ -1,6 +1,7 @@
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
 import 'package:idec_face/custom_widgets/custom_selection.dart';
+import 'package:idec_face/screens/stores/single_store_view.dart';
 
 import '../../constants.dart';
 import '../../custom_widgets/drawer/drawer.dart';
@@ -53,6 +54,15 @@ class _StoresPageState extends State<StoresPage> {
                         sheetTitle: "Stores",
                         list: _listOfStores),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.sort)),
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.add_circle)),
+                    ],
+                  ),
                   Expanded(
                     child: Scrollbar(
                       thickness: 5,
@@ -64,7 +74,13 @@ class _StoresPageState extends State<StoresPage> {
                           itemBuilder: (context, index) {
                             return SingleChildScrollView(
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SingleStoreView()));
+                                },
                                 child: Card(
                                   elevation: 5,
                                   shape: RoundedRectangleBorder(
@@ -73,7 +89,6 @@ class _StoresPageState extends State<StoresPage> {
                                   child: SizedBox(
                                     height:
                                         MediaQuery.of(context).size.height / 15,
-
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
