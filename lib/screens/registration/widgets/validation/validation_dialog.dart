@@ -79,17 +79,17 @@ openValidationDialogWindow(
                         validationErrorText: firstname.text.isEmptyValidate,
                         assetName: "assets/svg/user.svg"),
                     PreviewText(
-                     // assetName: "assets/svg/user.svg",
+                      // assetName: "assets/svg/user.svg",
                       titletext: "Middle Name",
                       controllertext: middlename.text,
                     ),
                     ValidationText(
-                        titletext: "Last Name",
-                        isValidated: lastname.text.isEmptyValidate.isEmpty,
-                        validationErrorText: lastname.text.isEmptyValidate,
-                        controllertext: lastname.text,
-                        //assetName: "assets/svg/user.svg",
-                        ),
+                      titletext: "Last Name",
+                      isValidated: lastname.text.isEmptyValidate.isEmpty,
+                      validationErrorText: lastname.text.isEmptyValidate,
+                      controllertext: lastname.text,
+                      //assetName: "assets/svg/user.svg",
+                    ),
                     PreviewText(
                       assetName: "assets/svg/useriD.svg",
                       titletext: "Employee ID",
@@ -118,7 +118,9 @@ openValidationDialogWindow(
                     ValidationText(
                       assetName: "assets/svg/phone.svg",
                       titletext: "Country Code",
-                      controllertext: code!.dialCode.toString(),
+                      isValidated:
+                          code!.dialCode.toString().isEmptyValidate.isEmpty,
+                      controllertext: code.dialCode.toString(),
                     ),
                     ValidationText(
                       assetName: "assets/svg/phone.svg",

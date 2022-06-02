@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:idec_face/models/config_request.dart';
-import 'package:idec_face/models/config_response.dart';
+import 'package:idec_face/models/config_response.dart'; 
 
 import 'package:idec_face/repositary/config_info_repository/providers/config_info_notifier_provider.dart';
 import 'package:idec_face/screens/registration/widgets/domain_data.dart';
@@ -331,7 +331,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                           children: [
                             const Text(
                               "v",
-                              style: TextStyle(color: Colors.grey),
+                              style: TextStyle(color: Colors.black),
                             ),
                             getVersionNumber(),
                           ],

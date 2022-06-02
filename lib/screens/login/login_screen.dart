@@ -211,7 +211,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       children: [
                         const Text(
                           "v",
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.black),
                         ),
                         getVersionNumber(),
                       ],

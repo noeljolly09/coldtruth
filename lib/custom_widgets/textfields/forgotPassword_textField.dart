@@ -64,7 +64,7 @@ class ForgotPasswordTextField extends ConsumerWidget {
           labelText: hint,
           labelStyle: TextStyle(color: AppConstants.labeltextgrey),
           floatingLabelStyle: const TextStyle(color: AppConstants.customblack),
-          contentPadding: const EdgeInsets.all(10)),
+          contentPadding: const EdgeInsets.only(top: 10)),
       keyboardType: input ?? TextInputType.text,
       textInputAction: textAction,
     );
