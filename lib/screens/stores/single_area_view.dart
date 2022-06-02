@@ -7,7 +7,7 @@ import '../../custom_widgets/chart/indicator.dart';
 import '../../custom_widgets/chart/pie_chart.dart';
 import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/drawer/drawer.dart';
-import '../../custom_widgets/navigation_bar.dart';
+
 import '../../custom_widgets/text.dart';
 import '../../utility/app_info.dart';
 
@@ -65,6 +65,7 @@ class _SingleAreaViewState extends State<SingleAreaView> {
                       Container(
                         margin: const EdgeInsets.all(5),
                         child: CustomSelectionBar(
+                          isConfigreceived: false,
                           circleSuffixIcon: true,
                           isSvg: false,
                           svgAsset: "",
@@ -189,6 +190,7 @@ class _SingleAreaViewState extends State<SingleAreaView> {
                             child: CustomSelectionBar(
                               circleSuffixIcon: true,
                               isSvg: false,
+                              isConfigreceived: false,
                               svgAsset: "",
                               width: MediaQuery.of(context).size.width / 1.4,
                               list: _listOfScores,

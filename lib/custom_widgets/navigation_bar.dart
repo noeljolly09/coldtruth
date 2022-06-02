@@ -1,5 +1,6 @@
-import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../screens/alerts_screens/alerts_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
@@ -10,7 +11,8 @@ import 'drawer/drawer.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final int pageIndex;
-  const CustomNavigationBar({Key? key, required this.pageIndex}) : super(key: key);
+  const CustomNavigationBar({Key? key, required this.pageIndex})
+      : super(key: key);
 
   @override
   State<CustomNavigationBar> createState() =>
@@ -21,6 +23,13 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   _CustomNavigationBarState(this.selectedIndex);
 
   int selectedIndex = 0;
+
+  String currentDate = DateFormat.MMMMd().format(DateTime.now());
+  String currentTime = DateFormat.jm().format(DateTime.now());
+
+  static const timestyle = TextStyle(fontSize: 10);
+
+  final appbartitle = ["Home", "Notifications", "Incidents", "Devices"];
 
   final screens = [
     const DashboardPage(),
@@ -44,24 +53,64 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             drawer: const MyDrawer(),
             appBar: AppBar(
               backgroundColor: AppConstants.primaryColor,
-              title: Text("${snapshot.data}"),
+              title: Center(child: Text(appbartitle[selectedIndex])),
+              actions: [
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: Row(
+                      children: [
+                        const Text(
+                          "Updated on: ",
+                          style: timestyle,
+                        ),
+                        Text(
+                          currentDate,
+                          style: timestyle,
+                        ),
+                        const Text(
+                          ',',
+                          style: timestyle,
+                        ),
+                        Text(
+                          currentTime,
+                          style: timestyle,
+                        ),
+                      ],
+                    ))
+              ],
             ),
             body: screens[selectedIndex],
-            bottomNavigationBar: SizedBox(
-              height: 60,
-              child: FancyBottomNavigation(
-                tabs: [
-                  TabData(iconData: Icons.home, title: ""),
-                  TabData(iconData: Icons.notifications_active, title: ""),
-                  TabData(iconData: Icons.warning, title: ""),
-                  TabData(iconData: Icons.devices, title: ""),
+            bottomNavigationBar: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              child: GNav(
+                gap: 2,
+                iconSize: 24,
+                activeColor: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: const Duration(milliseconds: 400),
+                tabBackgroundColor: AppConstants.primaryColor,
+                color: Colors.black,
+                tabs: const [
+                  GButton(
+                    icon: Icons.home,
+                    text: "Home",
+                  ),
+                  GButton(
+                    icon: Icons.notifications,
+                    text: "Notifications",
+                  ),
+                  GButton(
+                    icon: Icons.warning,
+                    text: "Incidents",
+                  ),
+                  GButton(
+                    icon: Icons.devices,
+                    text: "Devices",
+                  ),
                 ],
-                onTabChangedListener: onTapBar,
-                barBackgroundColor: Colors.white,
-                inactiveIconColor: AppConstants.customblack,
-                activeIconColor: Colors.white,
-                circleColor: AppConstants.primaryColor,
-                initialSelection: selectedIndex,
+                onTabChange: onTapBar,
               ),
             ),
           );

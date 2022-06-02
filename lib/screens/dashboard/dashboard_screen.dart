@@ -73,6 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     sheetTitle: "Stores",
                     controller: _textController,
                     searchController: _storeSearchController,
+                    isConfigreceived: false,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -161,6 +162,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       margin: const EdgeInsets.all(10),
                       child: CustomSelectionBar(
                         circleSuffixIcon: true,
+                        isConfigreceived: false,
                         isSvg: false,
                         svgAsset: "",
                         width: MediaQuery.of(context).size.width / 1.4,

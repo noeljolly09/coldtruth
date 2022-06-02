@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import '../../custom_widgets/chart/line_chart.dart';
 import '../../custom_widgets/drawer/drawer.dart';
-import '../../custom_widgets/navigation_bar.dart';
 import '../../utility/app_info.dart';
 
 class DetailedAlertScreen extends StatefulWidget {

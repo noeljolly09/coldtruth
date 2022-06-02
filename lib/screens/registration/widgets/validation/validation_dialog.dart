@@ -1,10 +1,15 @@
+import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
-import 'package:idec_face/screens/registration/widgets/validation/validation_preview.dart';
+
+import 'package:idec_face/screens/registration/widgets/validation/validation_text.dart';
+import 'package:idec_face/utility/extensions/string_utility.dart';
 
 import '../../../../constants.dart';
+import '../../../../custom_widgets/textfields/previewtext.dart';
 
-openValidationshowDialog(
+openValidationDialogWindow(
     BuildContext context,
+    CountryCode? code,
     TextEditingController domain,
     TextEditingController firstname,
     TextEditingController middlename,
@@ -14,7 +19,6 @@ openValidationshowDialog(
     TextEditingController gender,
     TextEditingController nationality,
     TextEditingController blood,
-    TextEditingController countryCode,
     TextEditingController phone,
     TextEditingController email) {
   showDialog(
@@ -26,11 +30,11 @@ openValidationshowDialog(
             alignment: const Alignment(0, 1),
             child: Container(
               height: 700,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
-                  color: AppConstants.inColor),
+                  color: Theme.of(context).scaffoldBackgroundColor),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10),
                 child: Column(
@@ -42,7 +46,7 @@ openValidationshowDialog(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          "Validation Error Details",
+                          "Preview Page",
                           style: TextStyle(
                               fontSize: 20,
                               color: AppConstants.customblack,
@@ -52,76 +56,80 @@ openValidationshowDialog(
                           margin: const EdgeInsets.all(5),
                           height: 35,
                           width: 60,
-                          decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: AppConstants.primaryColor),
-                          child: TextButton(
+                          child: IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text(
-                              "Done",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            icon: const Icon(Icons.close),
                           ),
                         ),
                       ],
                     ),
-                    ValidationPreviewText(
-                        titletext: "Domain *",
+                    ValidationText(
+                        titletext: "Domain",
                         controllertext: domain.text,
+                        isValidated: domain.text.isEmptyValidate.isEmpty,
+                        validationErrorText: domain.text.isEmptyValidate,
                         assetName: "assets/svg/domain.svg"),
-                    ValidationPreviewText(
-                        titletext: "First Name *",
+                    ValidationText(
+                        titletext: "First Name",
                         controllertext: firstname.text,
+                        isValidated: firstname.text.isEmptyValidate.isEmpty,
+                        validationErrorText: firstname.text.isEmptyValidate,
                         assetName: "assets/svg/user.svg"),
-                    ValidationPreviewText(
-                        titletext: "Middle Name",
-                        controllertext: middlename.text,
-                        assetName: "assets/svg/user.svg"),
-                    ValidationPreviewText(
-                        titletext: "Last Name *",
+                    PreviewText(
+                      assetName: "assets/svg/user.svg",
+                      titletext: "Middle Name",
+                      controllertext: middlename.text,
+                    ),
+                    ValidationText(
+                        titletext: "Last Name",
+                        isValidated: lastname.text.isEmptyValidate.isEmpty,
+                        validationErrorText: lastname.text.isEmptyValidate,
                         controllertext: lastname.text,
                         assetName: "assets/svg/user.svg"),
-                    ValidationPreviewText(
-                      assetName: "assets/svg/user.svg",
+                    PreviewText(
+                      assetName: "assets/svg/useriD.svg",
                       titletext: "Employee ID",
                       controllertext: employeeId.text,
                     ),
-                    ValidationPreviewText(
+                    PreviewText(
                       assetName: "assets/svg/calendar.svg",
                       titletext: "DOB",
                       controllertext: date.text,
                     ),
-                    ValidationPreviewText(
+                    PreviewText(
                       assetName: "assets/svg/gender.svg",
                       titletext: "Gender",
                       controllertext: gender.text,
                     ),
-                    ValidationPreviewText(
+                    PreviewText(
                       assetName: "assets/svg/nationality.svg",
                       titletext: "Nationality",
                       controllertext: nationality.text,
                     ),
-                    ValidationPreviewText(
+                    PreviewText(
                       assetName: "assets/svg/blood.svg",
                       titletext: "Blood Group",
                       controllertext: blood.text,
                     ),
-                    ValidationPreviewText(
+                    ValidationText(
                       assetName: "assets/svg/phone.svg",
-                      titletext: "Country Code *",
-                      controllertext: countryCode.text,
+                      titletext: "Country Code",
+                      controllertext: code!.dialCode.toString(),
                     ),
-                    ValidationPreviewText(
+                    ValidationText(
                       assetName: "assets/svg/phone.svg",
-                      titletext: "Phone Number *",
+                      isValidated: phone.text.isValidPhone.isEmpty,
+                      validationErrorText: phone.text.isValidPhone,
+                      titletext: "Phone Number",
                       controllertext: phone.text,
                     ),
-                    ValidationPreviewText(
+                    ValidationText(
                       assetName: "assets/svg/email.svg",
-                      titletext: "Email *",
+                      isValidated: email.text.isValidEmail.isEmpty,
+                      validationErrorText: email.text.isValidEmail,
+                      titletext: "Email",
                       controllertext: email.text,
                     ),
                   ],

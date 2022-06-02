@@ -1,10 +1,12 @@
+import 'package:country_list_pick/support/code_country.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../custom_widgets/textfields/previewtext.dart';
 
-openshowDialog(
+openDialogWindow(
     BuildContext context,
+    CountryCode? code,
     TextEditingController domain,
     TextEditingController firstname,
     TextEditingController middlename,
@@ -14,7 +16,6 @@ openshowDialog(
     TextEditingController gender,
     TextEditingController nationality,
     TextEditingController blood,
-    TextEditingController countryCode,
     TextEditingController phone,
     TextEditingController email) {
   showDialog(
@@ -26,11 +27,11 @@ openshowDialog(
             alignment: const Alignment(0, 1),
             child: Container(
               height: 700,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
-                  color: AppConstants.inColor),
+                  color: Theme.of(context).scaffoldBackgroundColor),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10),
                 child: Column(
@@ -52,18 +53,11 @@ openshowDialog(
                           margin: const EdgeInsets.all(5),
                           height: 35,
                           width: 60,
-                          decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: AppConstants.primaryColor),
-                          child: TextButton(
+                          child: IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text(
-                              "Done",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            icon: const Icon(Icons.close),
                           ),
                         ),
                       ],
@@ -81,7 +75,7 @@ openshowDialog(
                             lastname.text,
                         assetName: "assets/svg/user.svg"),
                     PreviewText(
-                      assetName: "assets/svg/user.svg",
+                      assetName: "assets/svg/useriD.svg",
                       titletext: "Employee ID",
                       controllertext: employeeId.text,
                     ),
@@ -108,7 +102,8 @@ openshowDialog(
                     PreviewText(
                       assetName: "assets/svg/phone.svg",
                       titletext: "Phone Number",
-                      controllertext: "+" + countryCode.text + " " + phone.text,
+                      controllertext:
+                          code!.dialCode.toString() + " " + phone.text,
                     ),
                     PreviewText(
                       assetName: "assets/svg/email.svg",

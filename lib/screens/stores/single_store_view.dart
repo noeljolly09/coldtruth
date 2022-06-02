@@ -8,8 +8,7 @@ import '../../custom_widgets/chart/indicator.dart';
 import '../../custom_widgets/chart/pie_chart.dart';
 import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/drawer/drawer.dart';
-import '../../custom_widgets/navigation_bar.dart';
-import '../../custom_widgets/text.dart';
+
 import '../../utility/app_info.dart';
 
 class SingleStoreView extends StatefulWidget {
@@ -66,6 +65,7 @@ class _SingleStoreViewState extends State<SingleStoreView> {
                       Container(
                         margin: const EdgeInsets.all(5),
                         child: CustomSelectionBar(
+                          isConfigreceived: false,
                           circleSuffixIcon: true,
                           isSvg: false,
                           svgAsset: "",
@@ -178,6 +178,7 @@ class _SingleStoreViewState extends State<SingleStoreView> {
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: CustomSelectionBar(
+                              isConfigreceived: false,
                               circleSuffixIcon: true,
                               isSvg: false,
                               svgAsset: "",

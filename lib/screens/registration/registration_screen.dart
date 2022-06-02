@@ -1,34 +1,48 @@
+import 'package:country_list_pick/country_list_pick.dart';
+import 'package:drop_down_list/drop_down_list.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:idec_face/screens/registration/widgets/dialog_box.dart';
+import 'package:idec_face/models/config_request.dart';
+import 'package:idec_face/models/config_response.dart';
+
+import 'package:idec_face/repositary/config_info_repository/providers/config_info_notifier_provider.dart';
 import 'package:idec_face/screens/registration/widgets/domain_data.dart';
 import 'package:idec_face/screens/registration/widgets/name_data.dart';
-
+import 'package:idec_face/screens/registration/widgets/preview_dialog.dart';
+import 'package:idec_face/utility/extensions/string_utility.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../constants.dart';
+import '../../custom_widgets/button.dart';
+import '../../custom_widgets/loading/loading.dart';
 import '../../custom_widgets/text.dart';
+import '../../dialogs/info_dialog/dialog_with_timer.dart';
+import '../../network/service_umbrella.dart';
+import '../../utility/app_info.dart';
+import '../../utility/connectivity/connectivity_constants.dart';
+import '../../utility/connectivity/connectivity_notifier_provider.dart';
+import '../../utility/privacy_policy.dart';
+import 'notifiers/registration_notifiers.dart';
 import 'widgets/contact_data.dart';
 import 'widgets/gender_data.dart';
 import 'widgets/validation/validation_dialog.dart';
 
-class RegistrationPage extends StatefulWidget {
+class RegistrationPage extends ConsumerStatefulWidget {
   const RegistrationPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
+  _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+class _RegistrationPageState extends ConsumerState<RegistrationPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isPreviewButtonActive = false;
   bool isSubmitButtonActive = false;
   int isPageChanged = 0;
-
-  String? customValidator(String? fieldContent) =>
-      fieldContent!.isEmpty ? 'This is required field' : null;
 
   final controller = PageController();
   final TextEditingController _domainController = TextEditingController();
@@ -37,12 +51,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _lnameController = TextEditingController();
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _dateinput = TextEditingController();
+  CountryCode? code = CountryCode(
+      dialCode: "+91", name: "India", code: "IN", flagUri: "flags/in.png");
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
   final TextEditingController _bloodController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _codeController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _getConfigAttributes();
+    });
+  }
 
   @override
   void dispose() {
@@ -57,37 +80,103 @@ class _RegistrationPageState extends State<RegistrationPage> {
     _nationalityController.dispose();
     _bloodController.dispose();
     _emailController.dispose();
-    _codeController.dispose();
     _phoneController.dispose();
     super.dispose();
   }
 
+  void _getConfigAttributes() {
+    final configInfoRequest =
+        ConfigInfoRequest(configAttributes: ["GNDR", "BG", "NTY"]);
+    ref
+        .read(configInfoNotifierProvider.notifier)
+        .getConfigAttributes(configInfoRequest);
+  }
+
+  String? customValidator(String? fieldContent) =>
+      fieldContent!.isEmpty ? 'This is required field' : null;
+
   @override
   Widget build(BuildContext context) {
-    double height25 = MediaQuery.of(context).size.height / 32.822;
-    double height78 = MediaQuery.of(context).size.height / 10.25714285714286;
+    double height20 = MediaQuery.of(context).size.height / 42.02;
+    double height78 = MediaQuery.of(context).size.height / 10.25;
+
+    final networkStatus = ref.read(connectivityNotifierProvider).status;
+    
+    initListeners(networkStatus);
+
     return SafeArea(
       child: Form(
-        key: _formkey,
+        key: _formKey,
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(height: AppConstants.abovecoldtruthheight),
-                Container(
-                  margin: const EdgeInsets.only(left: 80),
-                  child: SvgPicture.asset(
-                    'assets/svg/logo.svg',
-                    height: 85,
-                  ),
+                SvgPicture.asset(
+                  "assets/svg/logo.svg",
+                  height: 50,
                 ),
-                SizedBox(height: height25),
-                CustomTextWidget(
-                  color: AppConstants.customblack,
-                  size: AppConstants.authtitlesize,
-                  text: 'Registration',
-                  fontWeight: FontWeight.normal,
+                SizedBox(height: height20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const SizedBox(
+                      width: 40,
+                    ),
+                    Center(
+                      child: CustomTextWidget(
+                        color: AppConstants.customblack,
+                        size: AppConstants.authtitlesize,
+                        text: 'REGISTRATION',
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        if (_domainController.text.isEmptyValidate.isNotEmpty ||
+                            _fnameController.text.isEmptyValidate.isNotEmpty ||
+                            _lnameController.text.isEmptyValidate.isNotEmpty ||
+                            _phoneController.text.isValidPhone.isNotEmpty ||
+                            _emailController.text.isValidEmail.isNotEmpty) {
+                          openValidationDialogWindow(
+                              context,
+                              code,
+                              _domainController,
+                              _fnameController,
+                              _mnameController,
+                              _lnameController,
+                              _idController,
+                              _dateinput,
+                              _genderController,
+                              _nationalityController,
+                              _bloodController,
+                              _phoneController,
+                              _emailController);
+                        } else {
+                          openDialogWindow(
+                              context,
+                              code,
+                              _domainController,
+                              _fnameController,
+                              _mnameController,
+                              _lnameController,
+                              _idController,
+                              _dateinput,
+                              _genderController,
+                              _nationalityController,
+                              _bloodController,
+                              _phoneController,
+                              _emailController);
+                        }
+                      },
+                      icon: SvgPicture.asset(
+                        "assets/svg/eye.svg",
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  ],
                 ),
                 Expanded(
                   child: PageView(
@@ -115,15 +204,72 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           nationalityvalue: _nationalityController,
                           bloodvalue: _bloodController,
                           gendervalue: _genderController),
-                      ContactPageRegistrtion(
-                        onValidate: customValidator,
+                      ContactPageRegistration(
+                        onchanged: (countryCode) {
+                          code = countryCode;
+                          return code;
+                        },
+                        phoneNumberValidate: customValidator,
+                        emailValidate: customValidator,
                         emailController: _emailController,
-                        codeController: _codeController,
                         phoneController: _phoneController,
                       ),
                     ],
                   ),
                 ),
+                isPageChanged == 3
+                    ? Flexible(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: CustomButton(
+                            height: 50,
+                            function: () {
+                              if (_domainController
+                                      .text.isEmptyValidate.isNotEmpty ||
+                                  _fnameController
+                                      .text.isEmptyValidate.isNotEmpty ||
+                                  _lnameController
+                                      .text.isEmptyValidate.isNotEmpty ||
+                                  _phoneController
+                                      .text.isValidPhone.isNotEmpty ||
+                                  _emailController
+                                      .text.isValidEmail.isNotEmpty) {
+                                openValidationDialogWindow(
+                                    context,
+                                    code,
+                                    _domainController,
+                                    _fnameController,
+                                    _mnameController,
+                                    _lnameController,
+                                    _idController,
+                                    _dateinput,
+                                    _genderController,
+                                    _nationalityController,
+                                    _bloodController,
+                                    _phoneController,
+                                    _emailController);
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (context) =>
+                                      const InfoDialogWithTimer(
+                                    title: "Registered",
+                                    message: "Successfullly Registered",
+                                  ),
+                                );
+                              }
+                            },
+                            buttonColor: Theme.of(context).primaryColor,
+                            buttonBorder:
+                                Border.all(color: Colors.white30, width: 2),
+                            buttonBorderRadius: BorderRadius.circular(05),
+                            iconColor: Colors.white,
+                            data: 'Submit',
+                          ),
+                        ),
+                      )
+                    : const Text(""),
               ],
             ),
             bottomSheet: Container(
@@ -133,75 +279,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _domainController.text.isNotEmpty
-                            ? () {
-                                if (_domainController.text.isEmpty ||
-                                    _fnameController.text.isEmpty ||
-                                    _lnameController.text.isEmpty ||
-                                    _codeController.text.isEmpty ||
-                                    _phoneController.text.isEmpty ||
-                                    _emailController.text.isEmpty) {
-                                  openValidationshowDialog(
-                                      context,
-                                      _domainController,
-                                      _fnameController,
-                                      _mnameController,
-                                      _lnameController,
-                                      _idController,
-                                      _dateinput,
-                                      _genderController,
-                                      _nationalityController,
-                                      _bloodController,
-                                      _codeController,
-                                      _phoneController,
-                                      _emailController);
-                                } else {
-                                  openshowDialog(
-                                      context,
-                                      _domainController,
-                                      _fnameController,
-                                      _mnameController,
-                                      _lnameController,
-                                      _idController,
-                                      _dateinput,
-                                      _genderController,
-                                      _nationalityController,
-                                      _bloodController,
-                                      _codeController,
-                                      _phoneController,
-                                      _emailController);
-                                }
-                              }
-                            : null,
-                        child: const Text('Preview'),
+                  Center(
+                    child: SmoothPageIndicator(
+                      controller: controller,
+                      count: 4,
+                      axisDirection: Axis.horizontal,
+                      effect: const WormEffect(
+                        dotWidth: 10,
+                        dotHeight: 10,
+                        activeDotColor: Colors.black,
                       ),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width / 10.285),
-                      Center(
-                        child: SmoothPageIndicator(
-                          controller: controller,
-                          count: 4,
-                          axisDirection: Axis.horizontal,
-                          effect: WormEffect(
-                            dotWidth: 10,
-                            dotHeight: 10,
-                            activeDotColor: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width / 9.567),
-                      ElevatedButton(
-                        onPressed: isPageChanged == 3 ? () {} : null,
-                        child: const Text('Register'),
-                      )
-                    ],
+                    ),
                   ),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: Row(
@@ -215,7 +305,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         const SizedBox(width: 5),
                         InkWell(
                           onTap: () {
-                            Navigator.pushNamed(context, '/');
+                            Navigator.pop(context);
                           },
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
@@ -226,17 +316,134 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               size: 15,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.w400,
-                              text: 'Login Here',
+                              text: 'Login',
                             ),
                           ),
                         )
                       ],
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "v",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            getVersionNumber(),
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const PrivacyPolicyPage());
+                        },
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        hoverColor: AppConstants.secondaryColor,
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          child: const Text(
+                            "Privacy Policy",
+                            style: TextStyle(
+                                fontSize: 10,
+                                decoration: TextDecoration.underline,
+                                color: Colors.black),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             )),
       ),
     );
+  }
+
+  initListeners(ConnectionStatus networkStatus) {
+    ref.listen(configInfoNotifierProvider, ((previous, next) {
+      final configInfoResponse = next as ServiceResponse<ConfigResponse?>;
+
+      if (configInfoResponse.status == ServiceStatus.loading) {
+      } else if (configInfoResponse.status == ServiceStatus.completed) {
+        List<SelectedListItem> _listOfgender = [];
+        List<SelectedListItem> _listOfnationality = [];
+        List<SelectedListItem> _listOfbloodgroups = [];
+        List<SelectedListItem> _listOfSelectionOption = [];
+        if (configInfoResponse.data!.response!.isNotEmpty) {
+          for (var element in configInfoResponse.data!.response!) {
+            //gender
+            if (element.value!.genderResponse != null) {
+              for (var item in element.value!.genderResponse!) {
+                _listOfgender
+                    .add(SelectedListItem(false, item.name!.capitalize));
+              }
+            }
+            //blood group
+            if (element.value!.bloodGrpResponse != null) {
+              for (var item in element.value!.bloodGrpResponse!) {
+                _listOfbloodgroups
+                    .add(SelectedListItem(false, item.value!.capitalize));
+              }
+            }
+            //nationality
+            if (element.value!.nationalityResponse != null) {
+              for (var item in element.value!.nationalityResponse!) {
+                _listOfnationality
+                    .add(SelectedListItem(false, item.name!.capitalize));
+              }
+            }
+            //list of select options
+            if (element.value!.selectionResponse != null) {
+              for (var item in element.value!.selectionResponse!) {
+                _listOfSelectionOption
+                    .add(SelectedListItem(false, item.name!.capitalize));
+              }
+            }
+          }
+          ref.read(registrationNotifier).updateConfigState(value: true);
+          ref
+              .read(registrationNotifier)
+              .updatelistOfbloodgroupsState(value: _listOfbloodgroups);
+          ref
+              .read(registrationNotifier)
+              .updatelistOfgenderState(value: _listOfgender);
+          ref
+              .read(registrationNotifier)
+              .updatelistOfnationalityState(value: _listOfnationality);
+          ref
+              .read(registrationNotifier)
+              .updatelistOfSelectOptionsState(value: _listOfSelectionOption);
+        }
+      } else if (configInfoResponse.status == ServiceStatus.error) {
+        ref.read(registrationNotifier).updateConfigState(value: false);
+        if (networkStatus == ConnectionStatus.offline) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const InfoDialogWithTimer(
+              title: "Error",
+              message: "No Internet Connectivity",
+            ),
+          );
+        } else {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const InfoDialogWithTimer(
+              title: "Error",
+              message: "Something went wrong",
+            ),
+          );
+        }
+      }
+    }));
   }
 }

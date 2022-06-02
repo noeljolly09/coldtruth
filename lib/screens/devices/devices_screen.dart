@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import '../../custom_widgets/custom_selection.dart';
-import '../../custom_widgets/navigation_bar.dart';
 import '../../custom_widgets/ticket/ticket_text.dart';
 
 class DevicesPage extends StatefulWidget {
@@ -49,6 +48,8 @@ class _DevicesPageState extends State<DevicesPage> {
                 Container(
                   margin: const EdgeInsets.all(5),
                   child: CustomSelectionBar(
+                    isConfigreceived: false
+                    ,
                     circleSuffixIcon: true,
                     isSvg: false,
                     svgAsset: "",
@@ -67,6 +68,7 @@ class _DevicesPageState extends State<DevicesPage> {
                     Container(
                       margin: const EdgeInsets.all(5),
                       child: CustomSelectionBar(
+                        isConfigreceived: false,
                         circleSuffixIcon: true,
                         isSvg: false,
                         svgAsset: "",

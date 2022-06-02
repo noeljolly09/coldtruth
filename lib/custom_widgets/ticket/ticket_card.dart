@@ -1,4 +1,3 @@
-
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
 import 'package:idec_face/custom_widgets/ticket/ticket_text.dart';
@@ -6,7 +5,6 @@ import 'package:idec_face/custom_widgets/ticket/ticket_text.dart';
 import '../../../constants.dart';
 import '../../../custom_widgets/custom_selection.dart';
 import '../../../custom_widgets/text.dart';
-
 
 class CustomCardTicket extends StatefulWidget {
   const CustomCardTicket({Key? key}) : super(key: key);
@@ -89,6 +87,7 @@ class _CustomCardTicketState extends State<CustomCardTicket> {
                       color: AppConstants.primaryColor),
                 ),
                 CustomSelectionBar(
+                  isConfigreceived: false,
                   circleSuffixIcon: true,
                   isSvg: false,
                   svgAsset: "",
@@ -122,6 +121,7 @@ class _CustomCardTicketState extends State<CustomCardTicket> {
                       ],
                     ),
                     CustomSelectionBar(
+                      isConfigreceived: false,
                       isSvg: false,
                       circleSuffixIcon: true,
                       svgAsset: "",

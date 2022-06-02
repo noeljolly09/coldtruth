@@ -47,7 +47,6 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
   //   });
   // }
 
-
   bool isSwitched = false;
   var textValue = 'Inactive';
   void toggleSwitch(bool value) {
@@ -63,7 +62,6 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
       });
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +102,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                       color: AppConstants.primaryColor),
                 ),
                 CustomSelectionBar(
+                  isConfigreceived: false,
                   circleSuffixIcon: true,
                   isSvg: false,
                   svgAsset: "",
@@ -138,6 +137,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                       ],
                     ),
                     CustomSelectionBar(
+                      isConfigreceived: false,
                       isSvg: false,
                       circleSuffixIcon: true,
                       svgAsset: "",

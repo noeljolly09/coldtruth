@@ -53,3 +53,5 @@ class AppConstants {
   static double listitemtextsize = 16;
 }
 
+
+typedef SDMap = Map<String, dynamic>;

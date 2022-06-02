@@ -43,6 +43,7 @@ class _StoresPageState extends State<StoresPage> {
                   Container(
                     margin: const EdgeInsets.all(5),
                     child: CustomSelectionBar(
+                      isConfigreceived: false,
                         controller: _storeController,
                         searchController: _storeSearchController,
                         width: MediaQuery.of(context).size.width,
