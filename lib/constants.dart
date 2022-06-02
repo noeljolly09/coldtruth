@@ -16,6 +16,8 @@ class AppConstants {
 
   static const Color customgrey = Color(0xfff2f7f8);
 
+  static Color labeltextgrey = Colors.grey[500]!;
+
   static const Color inColor = Color(0xFFEEEEEE);
 
   static const Color bgColor = Color(0xFFFBFCF8);
@@ -52,6 +54,5 @@ class AppConstants {
 
   static double listitemtextsize = 16;
 }
-
 
 typedef SDMap = Map<String, dynamic>;

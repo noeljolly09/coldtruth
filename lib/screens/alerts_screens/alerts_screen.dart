@@ -39,14 +39,6 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _statusController = TextEditingController();
 
-  // var _addCard = 0;
-
-  // void _incrementCard() {
-  //   setState(() {
-  //     _addCard++;
-  //   });
-  // }
-
   bool isSwitched = false;
   var textValue = 'Inactive';
   void toggleSwitch(bool value) {
@@ -67,7 +59,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppConstants.inColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
@@ -91,65 +83,62 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  padding: const EdgeInsets.all(5),
-                  child: const CustomTextWidget(
-                      text: "Mr.MarshMello",
-                      size: 30,
-                      color: AppConstants.primaryColor),
-                ),
                 CustomSelectionBar(
                   isConfigreceived: false,
-                  circleSuffixIcon: true,
+                  circleSuffixIcon: false,
                   isSvg: false,
                   svgAsset: "",
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width / 1.2,
                   list: _listOfStores,
-                  hinttext: "Search Stores",
+                  hinttext: "All Store",
                   searchhinttext: "Search Store",
                   sheetTitle: "Stores",
                   controller: _storetextController,
                   searchController: _searchController,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const SizedBox(width: 10),
-                        Text(
-                          textValue,
-                          style: const TextStyle(
-                              fontSize: 20, color: AppConstants.secondaryColor),
-                        ),
-                        Switch(
-                          onChanged: toggleSwitch,
-                          value: isSwitched,
-                          activeColor: AppConstants.secondaryColor,
-                          activeTrackColor: AppConstants.primaryColor,
-                          inactiveThumbColor: Colors.redAccent,
-                          inactiveTrackColor: Colors.orange,
-                        ),
-                      ],
-                    ),
-                    CustomSelectionBar(
-                      isConfigreceived: false,
-                      isSvg: false,
-                      circleSuffixIcon: true,
-                      svgAsset: "",
-                      list: _listofStatus,
-                      width: MediaQuery.of(context).size.width / 2,
-                      controller: _statustextController,
-                      searchController: _statusController,
-                      hinttext: "Status",
-                      searchhinttext: "Status",
-                      sheetTitle: "Status",
-                    ),
-                  ],
+                const SizedBox(height: 10),
+                Container(
+                  color: Colors.grey.shade200,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const SizedBox(width: 10),
+                          Text(
+                            textValue,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: AppConstants.secondaryColor),
+                          ),
+                          Switch(
+                            onChanged: toggleSwitch,
+                            value: isSwitched,
+                            activeColor: AppConstants.secondaryColor,
+                            activeTrackColor: AppConstants.primaryColor,
+                            inactiveThumbColor: Colors.redAccent,
+                            inactiveTrackColor: Colors.orange,
+                          ),
+                        ],
+                      ),
+                      CustomSelectionBar(
+                        isConfigreceived: false,
+                        isSvg: false,
+                        circleSuffixIcon: false,
+                        svgAsset: "",
+                        list: _listofStatus,
+                        width: MediaQuery.of(context).size.width / 2,
+                        controller: _statustextController,
+                        searchController: _statusController,
+                        hinttext: "Status",
+                        searchhinttext: "Status",
+                        sheetTitle: "Status",
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: Scrollbar(
@@ -251,82 +240,75 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                 child: Card(
                                   child: Container(
                                     height:
-                                        MediaQuery.of(context).size.height / 6,
+                                        MediaQuery.of(context).size.height / 5,
                                     color: Colors.white,
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 15,
-                                              child: Text("${index + 1}",
-                                                  style: const TextStyle(
-                                                      fontSize: 16)),
-                                              backgroundColor:
-                                                  AppConstants.primaryColor,
-                                            ),
-                                          ],
+                                        const Icon(
+                                          Icons.arrow_left,
                                         ),
-                                        const SizedBox(width: 4),
                                         Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: const [
-                                                TicketText(
-                                                  islabelrequired: true,
-                                                  label: "Ticket No.",
-                                                  value: "1100224",
-                                                ),
-                                                SizedBox(width: 5),
-                                                TicketText(
-                                                  islabelrequired: false,
-                                                  label: "",
-                                                  value: "10:00, 23March 2022",
-                                                ),
-                                              ],
+                                            const TicketText(
+                                              islabelrequired: true,
+                                              isSameAsLabelStyle: true,
+                                              label: "Ticket No :",
+                                              value: "1100224",
+                                              withlabelStyle: TextStyle(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: const [
-                                                TicketText(
-                                                  islabelrequired: true,
-                                                  label: "Active Time",
-                                                  value: "17 Min",
-                                                ),
-                                              ],
+                                            const TicketText(
+                                              islabelrequired: false,
+                                              label: "",
+                                              value: "10:00, 23March 2022",
                                             ),
-                                            Row(
-                                              children: const [
-                                                TicketText(
-                                                  islabelrequired: false,
-                                                  label: "Area",
-                                                  value: "Beverages",
-                                                ),
-                                                TicketText(
-                                                  islabelrequired: false,
-                                                  label: "Store",
-                                                  value: "Hudson Square",
-                                                ),
-                                              ],
+                                            TicketText(
+                                              islabelrequired: true,
+                                              isSameAsLabelStyle: false,
+                                              label: "Active Time:",
+                                              value: "17 Min",
+                                              valueStyle: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
+                                            ),
+                                            Container(
+                                              height: 50,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.6,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Colors.greenAccent),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: const [
+                                                  TicketText(
+                                                    islabelrequired: false,
+                                                    label: "",
+                                                    value: "Beverages",
+                                                  ),
+                                                  Text(','),
+                                                  TicketText(
+                                                    islabelrequired: false,
+                                                    label: "",
+                                                    value: "Hudson Square",
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
+                                        const Icon(Icons.arrow_right),
                                       ],
                                     ),
                                   ),

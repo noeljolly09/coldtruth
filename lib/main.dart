@@ -31,8 +31,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFF006e74), //custom teal
         primarySwatch: Colors.teal, // material teal
         backgroundColor: const Color(0xfff2f7f8), //custom grey
-        scaffoldBackgroundColor:
-            const Color(0xFFEEEEEE), //custom white bg color
+        scaffoldBackgroundColor: Colors.white, //custom white bg color
 
 //
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -61,7 +60,7 @@ class MyApp extends StatelessWidget {
           headline2: TextStyle(fontSize: 20), // title
           headline5: TextStyle(fontSize: 16), // modal text
           headline6: TextStyle(fontSize: 19), // button text
-          button: TextStyle(fontSize: 14), // button size
+          button: TextStyle(fontSize: 14, color: Colors.white), // button size
         ),
       ),
 
@@ -73,7 +72,7 @@ class MyApp extends StatelessWidget {
         '/forgot_password': (context) => const ForgotPasswordPage(),
         '/register': (context) => const RegistrationPage(),
         '/dashboard': (context) => const DashboardPage(),
-        '/navigation_bar': (context) => const CustomNavigationBar(pageIndex: 0),
+        '/navigation_bar': (context) =>  CustomNavigationBar(pageIndex: 0),
         '/notifications': (context) => const AlertsPage(),
         '/settings': (context) => const IncidentsPage(),
       },

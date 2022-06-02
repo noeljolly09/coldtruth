@@ -15,7 +15,6 @@ import 'package:idec_face/utility/extensions/string_utility.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../constants.dart';
 import '../../custom_widgets/button.dart';
-import '../../custom_widgets/loading/loading.dart';
 import '../../custom_widgets/text.dart';
 import '../../dialogs/info_dialog/dialog_with_timer.dart';
 import '../../network/service_umbrella.dart';
@@ -25,7 +24,7 @@ import '../../utility/connectivity/connectivity_notifier_provider.dart';
 import '../../utility/privacy_policy.dart';
 import 'notifiers/registration_notifiers.dart';
 import 'widgets/contact_data.dart';
-import 'widgets/gender_data.dart';
+import 'widgets/personal_data.dart';
 import 'widgets/validation/validation_dialog.dart';
 
 class RegistrationPage extends ConsumerStatefulWidget {
@@ -99,11 +98,8 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
   Widget build(BuildContext context) {
     double height20 = MediaQuery.of(context).size.height / 42.02;
     double height78 = MediaQuery.of(context).size.height / 10.25;
-
     final networkStatus = ref.read(connectivityNotifierProvider).status;
-    
     initListeners(networkStatus);
-
     return SafeArea(
       child: Form(
         key: _formKey,
@@ -153,7 +149,8 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                               _nationalityController,
                               _bloodController,
                               _phoneController,
-                              _emailController);
+                              _emailController,
+                              formHeader: "Preview Page");
                         } else {
                           openDialogWindow(
                               context,
@@ -235,19 +232,21 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                                   _emailController
                                       .text.isValidEmail.isNotEmpty) {
                                 openValidationDialogWindow(
-                                    context,
-                                    code,
-                                    _domainController,
-                                    _fnameController,
-                                    _mnameController,
-                                    _lnameController,
-                                    _idController,
-                                    _dateinput,
-                                    _genderController,
-                                    _nationalityController,
-                                    _bloodController,
-                                    _phoneController,
-                                    _emailController);
+                                  context,
+                                  code,
+                                  _domainController,
+                                  _fnameController,
+                                  _mnameController,
+                                  _lnameController,
+                                  _idController,
+                                  _dateinput,
+                                  _genderController,
+                                  _nationalityController,
+                                  _bloodController,
+                                  _phoneController,
+                                  _emailController,
+                                  formHeader: "Validation Error!",
+                                );
                               } else {
                                 showDialog(
                                   context: context,
@@ -418,9 +417,6 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
           ref
               .read(registrationNotifier)
               .updatelistOfnationalityState(value: _listOfnationality);
-          ref
-              .read(registrationNotifier)
-              .updatelistOfSelectOptionsState(value: _listOfSelectionOption);
         }
       } else if (configInfoResponse.status == ServiceStatus.error) {
         ref.read(registrationNotifier).updateConfigState(value: false);

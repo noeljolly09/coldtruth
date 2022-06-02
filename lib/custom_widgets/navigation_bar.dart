@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../screens/alerts_screens/alerts_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
+import '../screens/dashboard/notifier/dashboard_notifier.dart';
 import '../screens/devices/devices_screen.dart';
 import '../screens/incidents/incidents_screen.dart';
 import '../utility/app_info.dart';
 import 'drawer/drawer.dart';
 
-class CustomNavigationBar extends StatefulWidget {
+class CustomNavigationBar extends ConsumerStatefulWidget {
   final int pageIndex;
   const CustomNavigationBar({Key? key, required this.pageIndex})
       : super(key: key);
 
   @override
-  State<CustomNavigationBar> createState() =>
+  _CustomNavigationBarState createState() =>
       _CustomNavigationBarState(pageIndex);
 }
 
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
+class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
   _CustomNavigationBarState(this.selectedIndex);
 
   int selectedIndex = 0;
@@ -29,7 +31,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   static const timestyle = TextStyle(fontSize: 10);
 
-  final appbartitle = ["Home", "Notifications", "Incidents", "Devices"];
+  final appbartitle = ["Home", "Events", "Incidents", "Devices"];
 
   final screens = [
     const DashboardPage(),
@@ -38,14 +40,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     const DevicesPage(),
   ];
 
-  void onTapBar(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
+   void onTapBar(int index) {
+    ref.read(navigationbarNotifier).updatedNavigtionIndex(value: index);
+    selectedIndex = index;
   }
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = ref.watch(navigationbarNotifier).selectionIndex;
     return FutureBuilder(
         future: getAppName(),
         builder: (context, snapshot) {
@@ -99,7 +101,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                   ),
                   GButton(
                     icon: Icons.notifications,
-                    text: "Notifications",
+                    text: "Events",
                   ),
                   GButton(
                     icon: Icons.warning,
