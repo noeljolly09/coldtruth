@@ -57,8 +57,7 @@ class MyDrawer extends ConsumerWidget {
                     ref
                         .read(navigationbarNotifier)
                         .updatedNavigtionIndex(value: 1);
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, "/navigation_bar", (route) => false);
+                    Navigator.pushNamed(context, "/navigation_bar");
                   },
                 ),
                 drawerItem(
@@ -68,8 +67,7 @@ class MyDrawer extends ConsumerWidget {
                     ref
                         .read(navigationbarNotifier)
                         .updatedNavigtionIndex(value: 2);
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, "/navigation_bar", (route) => false);
+                    Navigator.pushNamed(context, "/navigation_bar");
                   },
                 ),
                 drawerItem(

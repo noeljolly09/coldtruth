@@ -1,6 +1,5 @@
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/progress_bar.dart';
 
@@ -65,11 +64,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-
                 Column(
                   children: [
                     CustomProgressIndicator(
-                      percent: 10,
+                      percent: 80,
                       total: 100,
                       color: Colors.lightBlueAccent,
                       height: 70,
@@ -77,7 +75,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       qualityText: "Normal",
                     ),
                     CustomProgressIndicator(
-                      percent: 30,
+                      percent: 60,
                       total: 100,
                       color: Colors.pinkAccent,
                       height: 70,
@@ -85,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       qualityText: "Critical",
                     ),
                     CustomProgressIndicator(
-                      percent: 60,
+                      percent: 30,
                       total: 100,
                       color: Colors.orangeAccent,
                       height: 70,
@@ -93,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       qualityText: "Warning",
                     ),
                     CustomProgressIndicator(
-                      percent: 80,
+                      percent: 10,
                       total: 100,
                       color: Colors.grey,
                       height: 70,
@@ -102,100 +100,27 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ],
                 ),
-
-                // InkWell(
-                //   onTap: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) =>
-                //                 const CustomNavigationBar(pageIndex: 1)));
-                //   },
-                //   child: Container(
-                //     margin: const EdgeInsets.all(5),
-                //     padding: const EdgeInsets.all(5),
-                //     color: Colors.white,
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       crossAxisAlignment: CrossAxisAlignment.center,
-                //       children: <Widget>[
-                //         SizedBox(
-                //           width: MediaQuery.of(context).size.width / 2,
-                //           height: MediaQuery.of(context).size.width / 2,
-                //           child: PieChart(
-                //             PieChartData(
-                //                 pieTouchData: PieTouchData(touchCallback:
-                //                     (FlTouchEvent event, pieTouchResponse) {
-                //                   setState(() {
-                //                     if (!event.isInterestedForInteractions ||
-                //                         pieTouchResponse == null ||
-                //                         pieTouchResponse.touchedSection ==
-                //                             null) {
-                //                       touchedIndex = -1;
-                //                       return;
-                //                     }
-                //                     touchedIndex = pieTouchResponse
-                //                         .touchedSection!.touchedSectionIndex;
-                //                   });
-                //                 }),
-                //                 borderData: FlBorderData(
-                //                   show: false,
-                //                 ),
-                //                 sectionsSpace: 0,
-                //                 centerSpaceRadius: 30,
-                //                 sections: showingSections(touchedIndex)),
-                //           ),
-                //         ),
-                //         Column(
-                //           mainAxisSize: MainAxisSize.max,
-                //           mainAxisAlignment: MainAxisAlignment.end,
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: const <Widget>[
-                //             Indicator(
-                //               numbertext: "100",
-                //               size: 20,
-                //               fontsize: 20,
-                //               color: Color(0xff2ae729),
-                //               text: 'Normal :',
-                //             ),
-                //             SizedBox(height: 4),
-                //             Indicator(
-                //               numbertext: "100",
-                //               size: 20,
-                //               fontsize: 20,
-                //               color: Color(0xffe6a320),
-                //               text: 'Warning :',
-                //             ),
-                //             SizedBox(height: 4),
-                //             Indicator(
-                //               numbertext: "100",
-                //               size: 20,
-                //               color: Color(0xff8b0000),
-                //               fontsize: 20,
-                //               text: 'Faulty :',
-                //             ),
-                //             SizedBox(height: 18),
-                //           ],
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: CustomSelectionBar(
-                    circleSuffixIcon: false,
-                    isConfigreceived: false,
-                    isSvg: false,
-                    svgAsset: "",
-                    width: MediaQuery.of(context).size.width,
-                    list: _listOfScores,
-                    hinttext: "Sort by criticality score",
-                    searchhinttext: "Sort by criticality score",
-                    sheetTitle: "Score",
-                    controller: _scoreTextController,
-                    searchController: _scoreSearchController,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: CustomSelectionBar(
+                        circleSuffixIcon: false,
+                        isConfigreceived: false,
+                        isSvg: false,
+                        svgAsset: "",
+                        width: MediaQuery.of(context).size.width / 1.3,
+                        list: _listOfScores,
+                        hinttext: "Sort by criticality score",
+                        searchhinttext: "Sort by criticality score",
+                        sheetTitle: "Score",
+                        controller: _scoreTextController,
+                        searchController: _scoreSearchController,
+                      ),
+                    ),
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.sort))
+                  ],
                 ),
                 Expanded(
                   child: Scrollbar(
@@ -213,7 +138,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 elevation: 5,
                                 child: Container(
                                   color: (index % 2 == 0)
-                                      ? Colors.grey.shade400
+                                      ? Colors.grey.shade300
                                       : Colors.white,
                                   height:
                                       MediaQuery.of(context).size.height / 15,

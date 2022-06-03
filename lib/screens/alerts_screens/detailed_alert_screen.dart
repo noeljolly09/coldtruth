@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:idec_face/custom_widgets/chart/line_chart.dart';
+import 'package:idec_face/custom_widgets/navigation_bar.dart';
 
 import '../../constants.dart';
 import '../../custom_widgets/drawer/drawer.dart';
@@ -85,8 +87,8 @@ class _DetailedAlertScreenState extends State<DetailedAlertScreen> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  height: 200,
-                  color: Colors.amber,
+                  margin: const EdgeInsets.all(10),
+                  child: const CustomLineChart(),
                 ),
                 const SizedBox(height: 10),
                 Column(

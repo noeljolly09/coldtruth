@@ -5,7 +5,6 @@ import 'package:idec_face/screens/alerts_screens/detailed_alert_screen.dart';
 
 import '../../constants.dart';
 import '../../custom_widgets/custom_selection.dart';
-import '../../custom_widgets/text.dart';
 import '../../custom_widgets/ticket/ticket_text.dart';
 
 class AlertsPage extends ConsumerStatefulWidget {
@@ -40,8 +39,10 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
   final TextEditingController _statusController = TextEditingController();
 
   bool isSwitched = false;
+
   var textValue = 'Inactive';
-  void toggleSwitch(bool value) {
+
+  void toggleSwitch(bool? value) {
     if (isSwitched == false) {
       setState(() {
         isSwitched = true;
@@ -114,14 +115,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                 fontSize: 20,
                                 color: AppConstants.secondaryColor),
                           ),
-                          Switch(
-                            onChanged: toggleSwitch,
-                            value: isSwitched,
-                            activeColor: AppConstants.secondaryColor,
-                            activeTrackColor: AppConstants.primaryColor,
-                            inactiveThumbColor: Colors.redAccent,
-                            inactiveTrackColor: Colors.orange,
-                          ),
+                          Checkbox(value: isSwitched, onChanged: toggleSwitch),
                         ],
                       ),
                       CustomSelectionBar(

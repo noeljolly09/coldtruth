@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:idec_face/network/core/service_response.dart';
-import 'package:idec_face/screens/registration/notifiers/registration_notifiers.dart';
 import '../constants.dart';
 import '../models/config_request.dart';
 import '../repositary/config_info_repository/providers/config_info_notifier_provider.dart';
@@ -52,11 +51,9 @@ class _CustomSelectionBarState extends ConsumerState<CustomSelectionBar> {
         controller: widget.controller,
         validator: widget.validator,
         onTap: () {
-          final List<SelectedListItem> _listOfSelectOptions =
-              ref.watch(registrationNotifier).listOfSelectOptions;
-          if (_listOfSelectOptions.isNotEmpty) {
+          if (widget.list.isNotEmpty) {
             FocusScope.of(context).unfocus();
-            onTextFieldTap(_listOfSelectOptions);
+            onTextFieldTap(widget.list);
           } else {
             if (!widget.isConfigreceived) {
               _getConfigAttributes();

@@ -7,23 +7,17 @@ import '../screens/alerts_screens/alerts_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/dashboard/notifier/dashboard_notifier.dart';
 import '../screens/devices/devices_screen.dart';
-import '../screens/incidents/incidents_screen.dart';
 import '../utility/app_info.dart';
 import 'drawer/drawer.dart';
 
 class CustomNavigationBar extends ConsumerStatefulWidget {
-  final int pageIndex;
-  const CustomNavigationBar({Key? key, required this.pageIndex})
-      : super(key: key);
+  const CustomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  _CustomNavigationBarState createState() =>
-      _CustomNavigationBarState(pageIndex);
+  _CustomNavigationBarState createState() => _CustomNavigationBarState();
 }
 
 class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
-  _CustomNavigationBarState(this.selectedIndex);
-
   int selectedIndex = 0;
 
   String currentDate = DateFormat.MMMMd().format(DateTime.now());
@@ -31,16 +25,15 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
 
   static const timestyle = TextStyle(fontSize: 10);
 
-  final appbartitle = ["Home", "Events", "Incidents", "Devices"];
+  final appbartitle = ["Home", "Events", "Settings"];
 
   final screens = [
     const DashboardPage(),
     const AlertsPage(),
-    const IncidentsPage(),
     const DevicesPage(),
   ];
 
-   void onTapBar(int index) {
+  void onTapBar(int index) {
     ref.read(navigationbarNotifier).updatedNavigtionIndex(value: index);
     selectedIndex = index;
   }
@@ -56,6 +49,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
             appBar: AppBar(
               backgroundColor: AppConstants.primaryColor,
               title: Center(child: Text(appbartitle[selectedIndex])),
+              // leading: SvgPicture.asset('assets/svg/logo.svg'),
               actions: [
                 Align(
                     alignment: Alignment.bottomRight,
@@ -104,12 +98,8 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
                     text: "Events",
                   ),
                   GButton(
-                    icon: Icons.warning,
-                    text: "Incidents",
-                  ),
-                  GButton(
-                    icon: Icons.devices,
-                    text: "Devices",
+                    icon: Icons.settings,
+                    text: "Settings",
                   ),
                 ],
                 onTabChange: onTapBar,

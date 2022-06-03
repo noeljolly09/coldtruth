@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
         '/forgot_password': (context) => const ForgotPasswordPage(),
         '/register': (context) => const RegistrationPage(),
         '/dashboard': (context) => const DashboardPage(),
-        '/navigation_bar': (context) =>  CustomNavigationBar(pageIndex: 0),
+        '/navigation_bar': (context) => const CustomNavigationBar(),
         '/notifications': (context) => const AlertsPage(),
         '/settings': (context) => const IncidentsPage(),
       },

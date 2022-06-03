@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../constants.dart';
 import '../../custom_widgets/button.dart';
-import '../../custom_widgets/navigation_bar.dart';
 import '../../custom_widgets/text.dart';
 import '../../custom_widgets/textfields/custom_textfield.dart';
 import '../../utility/app_info.dart';

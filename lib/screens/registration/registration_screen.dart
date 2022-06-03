@@ -1,11 +1,10 @@
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:drop_down_list/drop_down_list.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:idec_face/models/config_request.dart';
-import 'package:idec_face/models/config_response.dart'; 
+import 'package:idec_face/models/config_response.dart';
 
 import 'package:idec_face/repositary/config_info_repository/providers/config_info_notifier_provider.dart';
 import 'package:idec_face/screens/registration/widgets/domain_data.dart';
@@ -417,6 +416,9 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
           ref
               .read(registrationNotifier)
               .updatelistOfnationalityState(value: _listOfnationality);
+          ref
+              .read(registrationNotifier)
+              .updatelistOfSelectOptionsState(value: _listOfSelectionOption);
         }
       } else if (configInfoResponse.status == ServiceStatus.error) {
         ref.read(registrationNotifier).updateConfigState(value: false);
