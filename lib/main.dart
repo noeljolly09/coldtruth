@@ -1,7 +1,7 @@
 import 'package:idec_face/custom_widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:idec_face/screens/alerts_screens/alerts_screen.dart';
 import 'package:idec_face/screens/dashboard/dashboard_screen.dart';
+import 'package:idec_face/screens/events_screens/events_screen.dart';
 import 'package:idec_face/screens/forgot_password.dart';
 import 'package:idec_face/screens/login/login_screen.dart';
 import 'package:idec_face/screens/registration/registration_screen.dart';

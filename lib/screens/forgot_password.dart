@@ -35,7 +35,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
   final TextEditingController _valueController = TextEditingController();
   final TextEditingController _optionsController = TextEditingController();
   final TextEditingController _searchController = TextEditingController();
-  List<SelectedListItem> _listOfSelectionOption = [];
+  final List<SelectedListItem> _listOfSelectionOption = [];
   @override
   void initState() {
     super.initState();
@@ -81,7 +81,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                     SizedBox(height: AppConstants.abovecoldtruthheight),
                     SvgPicture.asset(
                       "assets/svg/logo.svg",
-                      height: 50,
+                      height: 65,
                     ),
                     SizedBox(height: height25),
                     CustomTextWidget(

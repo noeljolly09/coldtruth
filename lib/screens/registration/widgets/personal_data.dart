@@ -131,6 +131,7 @@ class _GenderPageRegistrationState
                         width: MediaQuery.of(context).size.width / 1.2,
                         child: CustomSelectionBar(
                           circleSuffixIcon: false,
+                          isSortIconNeeded: false,
                           isSvg: true,
                           svgAsset: "assets/svg/gender.svg",
                           width: MediaQuery.of(context).size.width,
@@ -152,6 +153,7 @@ class _GenderPageRegistrationState
                         child: CustomSelectionBar(
                           circleSuffixIcon: false,
                           isSvg: true,
+                          isSortIconNeeded: false,
                           svgAsset: "assets/svg/nationality.svg",
                           width: MediaQuery.of(context).size.width,
                           list: _listOfnationality,
@@ -171,6 +173,7 @@ class _GenderPageRegistrationState
                         child: CustomSelectionBar(
                           circleSuffixIcon: false,
                           isSvg: true,
+                          isSortIconNeeded: false,
                           svgAsset: "assets/svg/blood.svg",
                           width: MediaQuery.of(context).size.width,
                           list: _listOfbloodgroups,

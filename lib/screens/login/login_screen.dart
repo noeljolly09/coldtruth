@@ -45,7 +45,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     SizedBox(height: AppConstants.abovecoldtruthheight),
                     SvgPicture.asset(
                       "assets/svg/logo.svg",
-                      height: 50,
+                      height: 65,
                     ),
                     SizedBox(height: height25),
                     CustomTextWidget(

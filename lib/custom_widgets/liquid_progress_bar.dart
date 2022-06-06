@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
-class CustomProgressIndicator extends StatefulWidget {
+class CustomLiquidProgressIndicator extends StatefulWidget {
   final double? height;
   final double? width;
   final int percent;
@@ -10,7 +10,7 @@ class CustomProgressIndicator extends StatefulWidget {
   final int total;
   final Color color;
 
-  const CustomProgressIndicator({
+  const CustomLiquidProgressIndicator({
     Key? key,
     this.height,
     this.width,
@@ -21,11 +21,12 @@ class CustomProgressIndicator extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomProgressIndicatorState createState() =>
-      _CustomProgressIndicatorState();
+  _CustomLiquidProgressIndicatorState createState() =>
+      _CustomLiquidProgressIndicatorState();
 }
 
-class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
+class _CustomLiquidProgressIndicatorState
+    extends State<CustomLiquidProgressIndicator> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,10 +41,25 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
         borderWidth: 2.0,
         borderRadius: 10.0,
         direction: Axis.horizontal,
-        center: Text(
-          widget.qualityText + " " + widget.percent.toString(),
-          style: const TextStyle(
-              fontSize: 15.0, fontWeight: FontWeight.w600, color: Colors.black),
+        center: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.qualityText,
+              style: const TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black),
+            ),
+            const SizedBox(width: 5),
+            Text(
+              widget.percent.toString(),
+              style: const TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black),
+            ),
+          ],
         ),
       ),
     );

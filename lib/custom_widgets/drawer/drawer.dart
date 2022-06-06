@@ -40,6 +40,7 @@ class MyDrawer extends ConsumerWidget {
                   ),
                 ),
                 drawerItem(
+                  isGreyedOut: false,
                   svg: "assets/svg/home.svg",
                   text: "Home",
                   onTap: () {
@@ -51,6 +52,7 @@ class MyDrawer extends ConsumerWidget {
                   },
                 ),
                 drawerItem(
+                  isGreyedOut: false,
                   svg: "assets/svg/event_icon.svg",
                   text: "Events",
                   onTap: () {
@@ -61,6 +63,7 @@ class MyDrawer extends ConsumerWidget {
                   },
                 ),
                 drawerItem(
+                  isGreyedOut: false,
                   svg: "assets/svg/device.svg",
                   text: "Devices",
                   onTap: () {
@@ -71,20 +74,26 @@ class MyDrawer extends ConsumerWidget {
                   },
                 ),
                 drawerItem(
+                  isGreyedOut: false,
                   svg: "assets/svg/support.svg",
                   text: "Support Request",
                   onTap: () {},
                 ),
                 const Divider(color: AppConstants.customblack),
                 drawerItem(
+                  isGreyedOut: false,
                   svg: "assets/svg/settings.svg",
                   text: "Settings",
                   onTap: () {},
                 ),
                 drawerItem(
+                  isGreyedOut: false,
                   svg: "assets/svg/logout.svg",
                   text: "Logout",
                   onTap: () {
+                    ref
+                        .read(navigationbarNotifier)
+                        .updatedNavigtionIndex(value: 0);
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

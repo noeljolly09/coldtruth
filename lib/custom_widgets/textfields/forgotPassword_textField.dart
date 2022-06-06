@@ -1,4 +1,3 @@
-
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,6 +43,7 @@ class ForgotPasswordTextField extends ConsumerWidget {
             width: MediaQuery.of(context).size.width / 3,
             child: CustomSelectionBar(
               circleSuffixIcon: false,
+              isSortIconNeeded: false,
               isSvg: true,
               svgAsset: "assets/svg/useriD.svg",
               width: MediaQuery.of(context).size.width,

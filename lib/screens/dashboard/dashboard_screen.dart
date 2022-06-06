@@ -1,7 +1,8 @@
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
+
 import '../../custom_widgets/custom_selection.dart';
-import '../../custom_widgets/progress_bar.dart';
+import '../../custom_widgets/liquid_progress_bar.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -21,13 +22,13 @@ class _DashboardPageState extends State<DashboardPage> {
     SelectedListItem(false, "Hudson Square"),
     SelectedListItem(false, "Palm Avenue"),
   ];
-  final List<SelectedListItem> _listOfScores = [
-    SelectedListItem(true, "1"),
-    SelectedListItem(false, "2"),
-    SelectedListItem(false, "3"),
-    SelectedListItem(false, "4"),
-    SelectedListItem(false, "5"),
-    SelectedListItem(false, "6"),
+  final List<SelectedListItem> _listOfSort = [
+    SelectedListItem(true, "Criticality Score"),
+    SelectedListItem(false, "Store"),
+    SelectedListItem(false, ""),
+    SelectedListItem(false, ""),
+    SelectedListItem(false, ""),
+    SelectedListItem(false, ""),
   ];
   int touchedIndex = -1;
 
@@ -51,13 +52,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   margin: const EdgeInsets.all(10),
                   child: CustomSelectionBar(
                     circleSuffixIcon: false,
+                    isSortIconNeeded: false,
                     isSvg: false,
                     svgAsset: "",
                     width: MediaQuery.of(context).size.width,
                     list: _listOfStores,
                     hinttext: "All Store",
                     searchhinttext: "Search Store",
-                    sheetTitle: "Stores",
+                    sheetTitle: "All Store",
                     controller: _textController,
                     searchController: _storeSearchController,
                     isConfigreceived: false,
@@ -66,7 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 const SizedBox(height: 10),
                 Column(
                   children: [
-                    CustomProgressIndicator(
+                    CustomLiquidProgressIndicator(
                       percent: 80,
                       total: 100,
                       color: Colors.lightBlueAccent,
@@ -74,7 +76,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       width: MediaQuery.of(context).size.width,
                       qualityText: "Normal",
                     ),
-                    CustomProgressIndicator(
+                    CustomLiquidProgressIndicator(
                       percent: 60,
                       total: 100,
                       color: Colors.pinkAccent,
@@ -82,7 +84,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       width: MediaQuery.of(context).size.width,
                       qualityText: "Critical",
                     ),
-                    CustomProgressIndicator(
+                    CustomLiquidProgressIndicator(
                       percent: 30,
                       total: 100,
                       color: Colors.orangeAccent,
@@ -90,7 +92,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       width: MediaQuery.of(context).size.width,
                       qualityText: "Warning",
                     ),
-                    CustomProgressIndicator(
+                    CustomLiquidProgressIndicator(
                       percent: 10,
                       total: 100,
                       color: Colors.grey,
@@ -101,25 +103,38 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      // decoration: BoxDecoration(
+                      //   border: Border(
+                      //     bottom: BorderSide(width: 1.0, color: Colors.black),
+                      //   ),
+                      // ),
+                      child: const Text(
+                        "Sort by",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 18),
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.all(10),
                       child: CustomSelectionBar(
+                        isSortIconNeeded: true,
                         circleSuffixIcon: false,
                         isConfigreceived: false,
                         isSvg: false,
                         svgAsset: "",
-                        width: MediaQuery.of(context).size.width / 1.3,
-                        list: _listOfScores,
-                        hinttext: "Sort by criticality score",
-                        searchhinttext: "Sort by criticality score",
-                        sheetTitle: "Score",
+                        width: MediaQuery.of(context).size.width / 1.6,
+                        list: _listOfSort,
+                        hinttext: "Criticality score",
+                        searchhinttext: "Select one to Sort",
+                        sheetTitle: "Sort",
                         controller: _scoreTextController,
                         searchController: _scoreSearchController,
                       ),
                     ),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.sort))
                   ],
                 ),
                 Expanded(
@@ -135,7 +150,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: InkWell(
                               onTap: () {},
                               child: Card(
-                                elevation: 5,
+                                elevation: 1,
                                 child: Container(
                                   color: (index % 2 == 0)
                                       ? Colors.grey.shade300

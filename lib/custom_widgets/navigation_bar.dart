@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
 import '../constants.dart';
-import '../screens/alerts_screens/alerts_screen.dart';
+import '../screens/events_screens/events_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/dashboard/notifier/dashboard_notifier.dart';
 import '../screens/devices/devices_screen.dart';

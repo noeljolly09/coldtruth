@@ -3,7 +3,9 @@ import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:idec_face/network/core/service_response.dart';
+
 import '../constants.dart';
 import '../models/config_request.dart';
 import '../repositary/config_info_repository/providers/config_info_notifier_provider.dart';
@@ -16,6 +18,7 @@ class CustomSelectionBar extends ConsumerStatefulWidget {
   final double width;
   final bool isSvg;
   final bool circleSuffixIcon;
+  final bool? isSortIconNeeded;
   final String svgAsset;
   final String? sheetTitle;
   final String? Function(String?)? validator;
@@ -31,6 +34,7 @@ class CustomSelectionBar extends ConsumerStatefulWidget {
     required this.width,
     required this.isSvg,
     required this.circleSuffixIcon,
+    this.isSortIconNeeded,
     required this.svgAsset,
     this.sheetTitle,
     this.validator,
@@ -83,17 +87,23 @@ class _CustomSelectionBarState extends ConsumerState<CustomSelectionBar> {
                     )
                   : null),
           suffixIconConstraints:
-              const BoxConstraints(maxHeight: 25, maxWidth: 30),
+              const BoxConstraints(maxHeight: 25, maxWidth: 35, minWidth: 20),
           suffixIcon: widget.circleSuffixIcon == true
               ? const Icon(
                   Icons.arrow_drop_down_circle_sharp,
                   color: AppConstants.primaryColor,
                 )
-              : const Icon(
-                  Icons.arrow_drop_down,
-                  size: 30,
-                  color: AppConstants.customblack,
-                ),
+              : (widget.isSortIconNeeded == false)
+                  ? const Icon(
+                      Icons.arrow_drop_down,
+                      size: 30,
+                      color: AppConstants.customblack,
+                    )
+                  : SvgPicture.asset(
+                      "assets/svg/sort.svg",
+                      height: 25,
+                      color: Colors.grey,
+                    ),
           fillColor: Colors.black12,
           border: widget.circleSuffixIcon == true
               ? const OutlineInputBorder(
