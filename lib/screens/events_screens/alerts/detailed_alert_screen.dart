@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:idec_face/custom_widgets/chart/line_chart.dart';
 
-import '../../constants.dart';
-import '../../custom_widgets/drawer/drawer.dart';
-import '../../custom_widgets/ticket/detail_ticket_text.dart';
-import '../../custom_widgets/ticket/ticket_text.dart';
+import '../../../constants.dart';
+import '../../../custom_widgets/drawer/drawer.dart';
+import '../../../custom_widgets/ticket/detail_ticket_text.dart';
+import '../../../custom_widgets/ticket/ticket_text.dart';
 
 class DetailedAlertScreen extends StatefulWidget {
   const DetailedAlertScreen({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _DetailedAlertScreenState extends State<DetailedAlertScreen> {
       drawer: const MyDrawer(),
       appBar: AppBar(
         backgroundColor: AppConstants.primaryColor,
-        title: Text("Events"),
+        title: const Text("Alerts"),
       ),
       body: Column(
         children: [

@@ -10,9 +10,6 @@ class IncidentsPage extends StatefulWidget {
 class _IncidentsPageState extends State<IncidentsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: const Center(child: Text("Incidents Page")),
-    );
+    return const Center(child: Text("Incidents Page"));
   }
 }

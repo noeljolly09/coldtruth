@@ -2,12 +2,13 @@ import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:idec_face/screens/events_screens/incidents/incidents_screen.dart';
 
 import '../../constants.dart';
 import '../../custom_widgets/custom_progress_bar.dart';
 import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/ticket/ticket_text.dart';
-import 'detailed_event_screen.dart';
+import 'alerts/detailed_alert_screen.dart';
 
 class AlertsPage extends ConsumerStatefulWidget {
   const AlertsPage({Key? key}) : super(key: key);
@@ -130,7 +131,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                         Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.only(top: 20),
                               color: Colors.grey.shade200,
                               child: Column(
                                 children: [
@@ -156,8 +157,8 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                         color: AppConstants
                                                             .severityCritical,
                                                       ),
-                                                      height: 15,
-                                                      width: 15,
+                                                      height: 10,
+                                                      width: 10,
                                                     ),
                                                     const SizedBox(width: 5),
                                                     const Padding(
@@ -180,8 +181,8 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                         color: AppConstants
                                                             .severityMajor,
                                                       ),
-                                                      height: 15,
-                                                      width: 15,
+                                                      height: 10,
+                                                      width: 10,
                                                     ),
                                                     const SizedBox(width: 5),
                                                     const Padding(
@@ -204,8 +205,8 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                         color: AppConstants
                                                             .severityMinor,
                                                       ),
-                                                      height: 15,
-                                                      width: 15,
+                                                      height: 10,
+                                                      width: 10,
                                                     ),
                                                     const SizedBox(width: 5),
                                                     const Padding(
@@ -276,7 +277,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                     shrinkWrap: true,
                                     // itemCount:_addCard,
                                     // itemCount: items.length,
-                                    itemCount: 50,
+                                    itemCount: 20,
                                     itemBuilder: (context, index) {
                                       return SingleChildScrollView(
                                         child: InkWell(
@@ -375,11 +376,12 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                               }
                                             },
                                             child: Card(
+                                              margin: const EdgeInsets.all(1),
                                               child: Container(
                                                 height: MediaQuery.of(context)
                                                         .size
                                                         .height /
-                                                    5,
+                                                    5.5,
                                                 color: Colors.white,
                                                 child: Row(
                                                   mainAxisAlignment:
@@ -437,12 +439,12 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                                   .primaryColor),
                                                         ),
                                                         Container(
-                                                          height: 40,
+                                                          height: 35,
                                                           width: MediaQuery.of(
                                                                       context)
                                                                   .size
                                                                   .width /
-                                                              1.6,
+                                                              1.4,
                                                           decoration: BoxDecoration(
                                                               borderRadius:
                                                                   BorderRadius
@@ -459,25 +461,27 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                                 islabelrequired:
                                                                     false,
                                                                 label: "",
-                                                                valueStyle: TextStyle(
-                                                                    color: Colors
-                                                                        .white),
+                                                                valueStyle:
+                                                                    TextStyle(
+                                                                        fontSize:
+                                                                            20),
                                                                 value:
                                                                     "Beverages",
                                                               ),
                                                               Text(
                                                                 ',',
                                                                 style: TextStyle(
-                                                                    color: Colors
-                                                                        .white),
+                                                                    fontSize:
+                                                                        20),
                                                               ),
                                                               TicketText(
                                                                 islabelrequired:
                                                                     false,
                                                                 label: "",
-                                                                valueStyle: TextStyle(
-                                                                    color: Colors
-                                                                        .white),
+                                                                valueStyle:
+                                                                    TextStyle(
+                                                                        fontSize:
+                                                                            20),
                                                                 value:
                                                                     "Hudson Square",
                                                               ),
@@ -502,11 +506,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                         ),
 
                         // second tab bar viiew widget
-                        const Center(
-                          child: Text(
-                            'Incidents Page',
-                          ),
-                        ),
+                        const IncidentsPage(),
                       ],
                     ),
                   ),

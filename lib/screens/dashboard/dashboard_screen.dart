@@ -150,7 +150,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: InkWell(
                               onTap: () {},
                               child: Card(
-                                elevation: 1,
+                                elevation: 0,
+                                margin: const EdgeInsets.all(0),
                                 child: Container(
                                   color: (index % 2 == 0)
                                       ? Colors.grey.shade300

@@ -27,11 +27,12 @@ class CustomProgressBar extends StatelessWidget {
                       color: AppConstants.severityCritical,
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                     ),
-                    height: 30,
+                    height: 25,
                     child: const Center(
                       child: Text(
                         '30',
-                        style: TextStyle(color: Colors.white, fontSize: 10),
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -49,11 +50,12 @@ class CustomProgressBar extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20)),
                         ),
-                        height: 30,
+                        height: 25,
                         child: const Center(
                             child: Text(
                           '40',
-                          style: TextStyle(color: Colors.white, fontSize: 10),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
                         )),
                       ),
                     ],
@@ -72,14 +74,12 @@ class CustomProgressBar extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20)),
                         ),
-                        height: 30,
+                        height: 25,
                         child: const Center(
                           child: Text(
                             '80',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

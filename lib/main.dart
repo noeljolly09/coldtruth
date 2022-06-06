@@ -5,9 +5,10 @@ import 'package:idec_face/screens/events_screens/events_screen.dart';
 import 'package:idec_face/screens/forgot_password.dart';
 import 'package:idec_face/screens/login/login_screen.dart';
 import 'package:idec_face/screens/registration/registration_screen.dart';
-import 'package:idec_face/screens/incidents/incidents_screen.dart';
+
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:idec_face/screens/settings_screen.dart';
 
 void main() {
   runApp(
@@ -74,7 +75,7 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => const DashboardPage(),
         '/navigation_bar': (context) => const CustomNavigationBar(),
         '/notifications': (context) => const AlertsPage(),
-        '/settings': (context) => const IncidentsPage(),
+        '/settings': (context) => const SettingsPage(),
       },
     );
   }

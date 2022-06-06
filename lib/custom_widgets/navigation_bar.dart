@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:idec_face/screens/settings_screen.dart';
 import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../screens/events_screens/events_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/dashboard/notifier/dashboard_notifier.dart';
-import '../screens/devices/devices_screen.dart';
 import '../utility/app_info.dart';
 import 'drawer/drawer.dart';
 
@@ -30,7 +30,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
   final screens = [
     const DashboardPage(),
     const AlertsPage(),
-    const DevicesPage(),
+    const SettingsPage(),
   ];
 
   void onTapBar(int index) {
@@ -48,7 +48,13 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
             drawer: const MyDrawer(),
             appBar: AppBar(
               backgroundColor: AppConstants.primaryColor,
-              title: Center(child: Text(appbartitle[selectedIndex])),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(width: 50),
+                  Text(appbartitle[selectedIndex]),
+                ],
+              ),
               // leading: SvgPicture.asset('assets/svg/logo.svg'),
               actions: [
                 Align(

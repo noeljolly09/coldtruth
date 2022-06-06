@@ -47,8 +47,8 @@ class MyDrawer extends ConsumerWidget {
                     ref
                         .read(navigationbarNotifier)
                         .updatedNavigtionIndex(value: 0);
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, "/navigation_bar", (route) => false);
+                    Navigator.pushNamed(
+                        context, "/navigation_bar");
                   },
                 ),
                 drawerItem(
@@ -58,33 +58,26 @@ class MyDrawer extends ConsumerWidget {
                   onTap: () {
                     ref
                         .read(navigationbarNotifier)
-                        .updatedNavigtionIndex(value: 1);
+                        .updatedNavigtionIndex(value: 1)
+                        ;
                     Navigator.pushNamed(context, "/navigation_bar");
                   },
                 ),
                 drawerItem(
-                  isGreyedOut: false,
+                  isGreyedOut: true,
                   svg: "assets/svg/device.svg",
                   text: "Devices",
-                  onTap: () {
-                    ref
-                        .read(navigationbarNotifier)
-                        .updatedNavigtionIndex(value: 2);
-                    Navigator.pushNamed(context, "/navigation_bar");
-                  },
                 ),
                 drawerItem(
-                  isGreyedOut: false,
+                  isGreyedOut: true,
                   svg: "assets/svg/support.svg",
                   text: "Support Request",
-                  onTap: () {},
                 ),
                 const Divider(color: AppConstants.customblack),
                 drawerItem(
-                  isGreyedOut: false,
+                  isGreyedOut: true,
                   svg: "assets/svg/settings.svg",
                   text: "Settings",
-                  onTap: () {},
                 ),
                 drawerItem(
                   isGreyedOut: false,
