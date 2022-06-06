@@ -18,8 +18,6 @@ class CustomNavigationBar extends ConsumerStatefulWidget {
 }
 
 class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
-  int selectedIndex = 0;
-
   String currentDate = DateFormat.MMMMd().format(DateTime.now());
   String currentTime = DateFormat.jm().format(DateTime.now());
 
@@ -35,7 +33,6 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
 
   void onTapBar(int index) {
     ref.read(navigationbarNotifier).updatedNavigtionIndex(value: index);
-    selectedIndex = index;
   }
 
   @override
@@ -88,6 +85,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
               child: GNav(
                 gap: 2,
                 iconSize: 24,
+                selectedIndex: selectedIndex,
                 activeColor: Colors.white,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

@@ -250,10 +250,15 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                                 showDialog(
                                   context: context,
                                   barrierDismissible: false,
-                                  builder: (context) =>
-                                      const InfoDialogWithTimer(
+                                  builder: (context) => InfoDialogWithTimer(
                                     title: "Registered",
                                     message: "Successfullly Registered",
+                                    isTimerActivated: true,
+                                    bttnText1: "Ok",
+                                    isCancelButtonVisible: false,
+                                    onPressedBttn1: () {
+                                      Navigator.of(context).pop();
+                                    },
                                   ),
                                 );
                               }
@@ -426,18 +431,30 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (context) => const InfoDialogWithTimer(
+            builder: (context) => InfoDialogWithTimer(
               title: "Error",
               message: "No Internet Connectivity",
+              isTimerActivated: true,
+              bttnText1: "Ok",
+              isCancelButtonVisible: false,
+              onPressedBttn1: () {
+                Navigator.of(context).pop();
+              },
             ),
           );
         } else {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (context) => const InfoDialogWithTimer(
+            builder: (context) => InfoDialogWithTimer(
               title: "Error",
               message: "Something went wrong",
+              isTimerActivated: true,
+              bttnText1: "Ok",
+              isCancelButtonVisible: false,
+              onPressedBttn1: () {
+                Navigator.of(context).pop();
+              },
             ),
           );
         }
