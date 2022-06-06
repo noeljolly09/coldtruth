@@ -7,6 +7,7 @@ import '../../constants.dart';
 import '../../custom_widgets/custom_progress_bar.dart';
 import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/ticket/ticket_text.dart';
+import '../../dialogs/info_dialog/dialog_with_timer.dart';
 import 'detailed_event_screen.dart';
 
 class AlertsPage extends ConsumerStatefulWidget {
@@ -325,51 +326,47 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                   DismissDirection.startToEnd) {
                                                 return showDialog(
                                                   context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title: const Text("Delete"),
-                                                    content: const Text(
-                                                        "Are you sure to delete"),
-                                                    actions: [
-                                                      ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(ctx)
-                                                                .pop(false);
-                                                          },
-                                                          child: const Text(
-                                                              'Cancel')),
-                                                      ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(ctx)
-                                                                .pop(true);
-                                                          },
-                                                          child: const Text(
-                                                              'Delete'))
-                                                    ],
+                                                  barrierDismissible: false,
+                                                  builder: (context) =>
+                                                      InfoDialogWithTimer(
+                                                    title: "Delete",
+                                                    message:
+                                                        "Are you sure to delete",
+                                                    isTimerActivated: true,
+                                                    bttnText1: "Delete",
+                                                    bttnText2: "Cancel",
+                                                    isCancelButtonVisible: true,
+                                                    onPressedBttn1: () {
+                                                      Navigator.of(context)
+                                                          .pop(true);
+                                                    },
+                                                    onPressedBttn2: () {
+                                                      Navigator.of(context)
+                                                          .pop(false);
+                                                    },
                                                   ),
                                                 );
                                               } else {
                                                 return showDialog(
                                                   context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title: const Text("Update"),
-                                                    content: const Text(
-                                                        "Are you sure to Update"),
-                                                    actions: [
-                                                      ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(ctx)
-                                                                .pop(false);
-                                                          },
-                                                          child: const Text(
-                                                              'Cancel')),
-                                                      ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(ctx)
-                                                                .pop(false);
-                                                          },
-                                                          child: const Text(
-                                                              'Update'))
-                                                    ],
+                                                  barrierDismissible: false,
+                                                  builder: (context) =>
+                                                      InfoDialogWithTimer(
+                                                    title: "Update",
+                                                    message:
+                                                        "Are you sure to Update",
+                                                    isTimerActivated: true,
+                                                    bttnText1: "Update",
+                                                    bttnText2: "Cancel",
+                                                    isCancelButtonVisible: true,
+                                                    onPressedBttn1: () {
+                                                      Navigator.of(context)
+                                                          .pop(false);
+                                                    },
+                                                    onPressedBttn2: () {
+                                                      Navigator.of(context)
+                                                          .pop(false);
+                                                    },
                                                   ),
                                                 );
                                               }
