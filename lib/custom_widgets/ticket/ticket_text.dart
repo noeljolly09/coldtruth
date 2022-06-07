@@ -33,6 +33,7 @@ class TicketText extends StatelessWidget {
               ? Row(
                   children: [
                     SizedBox(
+                      height: 32,
                       child: isIconNeeded == true ? icon : null,
                     ),
                     Text(

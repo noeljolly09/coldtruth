@@ -47,7 +47,7 @@ class _CustomLiquidProgressIndicatorState
             Text(
               widget.qualityText,
               style: const TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: Colors.black),
             ),
@@ -55,7 +55,7 @@ class _CustomLiquidProgressIndicatorState
             Text(
               widget.percent.toString(),
               style: const TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: Colors.black),
             ),

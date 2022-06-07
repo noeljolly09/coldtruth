@@ -40,47 +40,53 @@ class MyDrawer extends ConsumerWidget {
                   ),
                 ),
                 drawerItem(
-                  isGreyedOut: false,
+                  isdiabled: false,
                   svg: "assets/svg/home.svg",
                   text: "Home",
                   onTap: () {
                     ref
                         .read(navigationbarNotifier)
                         .updatedNavigtionIndex(value: 0);
-                    Navigator.pushNamed(
-                        context, "/navigation_bar");
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      "/navigation_bar",
+                      (Route<dynamic> route) => false,
+                    );
                   },
                 ),
                 drawerItem(
-                  isGreyedOut: false,
+                  isdiabled: false,
                   svg: "assets/svg/event_icon.svg",
                   text: "Events",
                   onTap: () {
                     ref
                         .read(navigationbarNotifier)
-                        .updatedNavigtionIndex(value: 1)
-                        ;
-                    Navigator.pushNamed(context, "/navigation_bar");
+                        .updatedNavigtionIndex(value: 1);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      "/navigation_bar",
+                      (Route<dynamic> route) => false,
+                    );
                   },
                 ),
                 drawerItem(
-                  isGreyedOut: true,
+                  isdiabled: true,
                   svg: "assets/svg/device.svg",
                   text: "Devices",
                 ),
                 drawerItem(
-                  isGreyedOut: true,
+                  isdiabled: true,
                   svg: "assets/svg/support.svg",
                   text: "Support Request",
                 ),
-                const Divider(color: AppConstants.customblack),
+                const Divider(color: AppConstants.customgrey, thickness: 0.5),
                 drawerItem(
-                  isGreyedOut: true,
+                  isdiabled: true,
                   svg: "assets/svg/settings.svg",
                   text: "Settings",
                 ),
                 drawerItem(
-                  isGreyedOut: false,
+                  isdiabled: false,
                   svg: "assets/svg/logout.svg",
                   text: "Logout",
                   onTap: () {
@@ -108,8 +114,8 @@ class MyDrawer extends ConsumerWidget {
                   child: Row(
                     children: [
                       const Text(
-                        "v",
-                        style: TextStyle(color: Colors.grey),
+                        "V",
+                        style: TextStyle(color: Colors.black),
                       ),
                       getVersionNumber(),
                     ],

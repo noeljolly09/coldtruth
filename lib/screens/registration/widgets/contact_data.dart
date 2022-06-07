@@ -27,8 +27,8 @@ class ContactPageRegistration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height30 = MediaQuery.of(context).size.height / 27.35;
-    double height40 = MediaQuery.of(context).size.height / 20.51;
+    double height30 = screenHeight(context, dividedBy: 27.35);
+    double height40 = screenHeight(context, dividedBy: 20.514);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -42,7 +42,7 @@ class ContactPageRegistration extends StatelessWidget {
             children: [
               Expanded(
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
+                  height: screenHeight(context, dividedBy: 2),
                   width: MediaQuery.of(context).size.width - 41.4285,
                   child: Column(
                     children: [
@@ -55,7 +55,7 @@ class ContactPageRegistration extends StatelessWidget {
                       ),
                       Container(height: height30),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 1.2,
+                        width: screenWidth(context, dividedBy: 1.2),
                         child: Row(
                           children: [
                             Container(
@@ -77,9 +77,9 @@ class ContactPageRegistration extends StatelessWidget {
                                   ),
                                   Container(
                                     margin: const EdgeInsets.only(bottom: 0),
-                                    width:
-                                        MediaQuery.of(context).size.width / 3.3,
-                                    height: 50,
+                                    width: screenWidth(context, dividedBy: 3.3),
+                                    height:
+                                        screenHeight(context, dividedBy: 16.41),
                                     child: CustomCountryCodePicker(
                                         changeCountryCode: onchanged),
                                   ),
@@ -99,7 +99,7 @@ class ContactPageRegistration extends StatelessWidget {
                       ),
                       Container(height: height40),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 1.2,
+                        width: screenWidth(context, dividedBy: 1.2),
                         child: Column(
                           children: [
                             CustomTextField(

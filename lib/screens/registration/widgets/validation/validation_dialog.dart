@@ -37,7 +37,7 @@ openValidationDialogWindow(
                       topRight: Radius.circular(20)),
                   color: Theme.of(context).scaffoldBackgroundColor),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,12 +46,15 @@ openValidationDialogWindow(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          formHeader,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: AppConstants.customblack,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text(
+                            formHeader,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: AppConstants.customblack,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                         Container(
                           margin: const EdgeInsets.all(5),

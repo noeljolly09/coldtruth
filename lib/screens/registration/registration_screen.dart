@@ -334,7 +334,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                         child: Row(
                           children: [
                             const Text(
-                              "v",
+                              "V",
                               style: TextStyle(color: Colors.black),
                             ),
                             getVersionNumber(),

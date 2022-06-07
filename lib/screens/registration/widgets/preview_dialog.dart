@@ -33,7 +33,7 @@ openDialogWindow(
                       topRight: Radius.circular(20)),
                   color: Theme.of(context).scaffoldBackgroundColor),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,12 +42,15 @@ openDialogWindow(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Preview Details",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: AppConstants.customblack,
-                              fontWeight: FontWeight.bold),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Preview Details",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: AppConstants.customblack,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                         Container(
                           margin: const EdgeInsets.all(5),

@@ -33,20 +33,20 @@ class ValidationText extends StatelessWidget {
                   ? const SizedBox()
                   : SvgPicture.asset(
                       assetName!,
-                      height: 25,
+                      height: screenHeight(context, dividedBy: 32.82),
                     ),
             ),
             Expanded(
               flex: 7,
               child: Container(
-                width: MediaQuery.of(context).size.width / 1.25,
+                width: screenWidth(context, dividedBy: 1.25),
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 decoration: isValidated!
                     ? BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
                             color: Colors.grey.shade400,
-                            width: 1.0,
+                            width: 1,
                           ),
                         ),
                       )
@@ -54,7 +54,7 @@ class ValidationText extends StatelessWidget {
                         border: Border(
                           bottom: BorderSide(
                             color: Colors.red,
-                            width: 1.0,
+                            width: 1,
                           ),
                         ),
                       ),

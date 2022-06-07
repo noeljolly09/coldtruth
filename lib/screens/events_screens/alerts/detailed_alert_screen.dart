@@ -21,11 +21,13 @@ class _DetailedAlertScreenState extends State<DetailedAlertScreen> {
       drawer: const MyDrawer(),
       appBar: AppBar(
         backgroundColor: AppConstants.primaryColor,
+        centerTitle: true,
         title: const Text("Alerts"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -49,7 +51,7 @@ class _DetailedAlertScreenState extends State<DetailedAlertScreen> {
                     isSameAsLabelStyle: false,
                     isIconNeeded: true,
                     icon: SvgPicture.asset('assets/svg/clock.svg', height: 20),
-                    label: " Active Time:",
+                    label: " Active Since:",
                     value: "17 Min",
                     valueStyle: TextStyle(
                         fontSize: 20,
@@ -57,10 +59,10 @@ class _DetailedAlertScreenState extends State<DetailedAlertScreen> {
                         color: Theme.of(context).primaryColor),
                   ),
                   Container(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width / 1.6,
+                    height: 35,
+                    width: MediaQuery.of(context).size.width / 1.4,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(18),
                         color: Colors.greenAccent),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -68,17 +70,17 @@ class _DetailedAlertScreenState extends State<DetailedAlertScreen> {
                         TicketText(
                           islabelrequired: false,
                           label: "",
-                          valueStyle: TextStyle(color: Colors.white),
+                          valueStyle: TextStyle(fontSize: 19),
                           value: "Beverages",
                         ),
                         Text(
                           ',',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(fontSize: 19),
                         ),
                         TicketText(
                           islabelrequired: false,
                           label: "",
-                          valueStyle: TextStyle(color: Colors.white),
+                          valueStyle: TextStyle(fontSize: 19),
                           value: "Hudson Square",
                         ),
                       ],

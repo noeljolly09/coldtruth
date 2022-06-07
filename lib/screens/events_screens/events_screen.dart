@@ -2,6 +2,7 @@ import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:idec_face/screens/events_screens/incidents/incidents_screen.dart';
 
 import '../../constants.dart';
@@ -10,6 +11,7 @@ import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/ticket/ticket_text.dart';
 import '../../dialogs/info_dialog/dialog_with_timer.dart';
 import 'alerts/detailed_alert_screen.dart';
+
 class AlertsPage extends ConsumerStatefulWidget {
   const AlertsPage({Key? key}) : super(key: key);
 
@@ -131,119 +133,115 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                         Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.only(top: 20),
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
                               color: Colors.grey.shade200,
                               child: Column(
                                 children: [
                                   const CustomProgressBar(),
+                                  const SizedBox(height: 10),
                                   IntrinsicHeight(
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, right: 5.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: AppConstants
-                                                            .severityCritical,
-                                                      ),
-                                                      height: 10,
-                                                      width: 10,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: AppConstants
+                                                          .severityCritical,
                                                     ),
-                                                    const SizedBox(width: 5),
-                                                    const Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 3.0),
-                                                      child: Text(
-                                                        'Critical',
-                                                        style: TextStyle(
-                                                          fontSize: 18,
-                                                        ),
+                                                    height: 10,
+                                                    width: 10,
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 3.0),
+                                                    child: Text(
+                                                      'Critical',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: AppConstants
-                                                            .severityMajor,
-                                                      ),
-                                                      height: 10,
-                                                      width: 10,
                                                     ),
-                                                    const SizedBox(width: 5),
-                                                    const Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 3.0),
-                                                      child: Text(
-                                                        'Major',
-                                                        style: TextStyle(
-                                                          fontSize: 18,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: AppConstants
-                                                            .severityMinor,
-                                                      ),
-                                                      height: 10,
-                                                      width: 10,
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: AppConstants
+                                                          .severityMajor,
                                                     ),
-                                                    const SizedBox(width: 5),
-                                                    const Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 3.0),
-                                                      child: Text(
-                                                        'Minor',
-                                                        style: TextStyle(
-                                                          fontSize: 18,
-                                                        ),
+                                                    height: 10,
+                                                    width: 10,
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 3.0),
+                                                    child: Text(
+                                                      'Major',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: AppConstants
+                                                          .severityMinor,
+                                                    ),
+                                                    height: 10,
+                                                    width: 10,
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 3.0),
+                                                    child: Text(
+                                                      'Minor',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        const VerticalDivider(
-                                          color: Colors.grey,
-                                          indent: 10,
-                                          endIndent: 10,
-                                          width: 5,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              textValue,
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  color: AppConstants
-                                                      .secondaryColor),
-                                            ),
-                                            Checkbox(
-                                                value: isSwitched,
-                                                onChanged: toggleSwitch),
-                                          ],
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(right: 10),
+                                          child: FlutterSwitch(
+                                              showOnOff: true,
+                                              height: 30,
+                                              width: 110,
+                                              activeText: "Active",
+                                              inactiveColor:
+                                                  Colors.grey.shade400,
+                                              inactiveTextColor: Colors.white,
+                                              activeColor:
+                                                  AppConstants.primaryColor,
+                                              inactiveText: "Inactive",
+                                              activeTextColor: Colors.white,
+                                              value: isSwitched,
+                                              onToggle: toggleSwitch),
                                         ),
                                       ],
                                     ),
@@ -331,7 +329,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                       InfoDialogWithTimer(
                                                     title: "Delete",
                                                     message:
-                                                        "Are you sure to delete",
+                                                        "Are you sure to delete?",
                                                     isTimerActivated: true,
                                                     bttnText1: "Delete",
                                                     bttnText2: "Cancel",
@@ -352,11 +350,11 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                   barrierDismissible: false,
                                                   builder: (context) =>
                                                       InfoDialogWithTimer(
-                                                    title: "Update",
+                                                    title: "Acknowledge",
                                                     message:
-                                                        "Are you sure to Update",
+                                                        "Are you sure to Acknowledge?",
                                                     isTimerActivated: true,
-                                                    bttnText1: "Update",
+                                                    bttnText1: "Ok",
                                                     bttnText2: "Cancel",
                                                     isCancelButtonVisible: true,
                                                     onPressedBttn1: () {
@@ -423,7 +421,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                             height: 20,
                                                           ),
                                                           label:
-                                                              " Active Time:",
+                                                              " Active Since:",
                                                           value: "17 Min",
                                                           valueStyle: TextStyle(
                                                               fontSize: 20,
@@ -441,13 +439,23 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                                   .size
                                                                   .width /
                                                               1.4,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20),
-                                                              color: Colors
-                                                                  .greenAccent),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              18),
+                                                                  color: (index %
+                                                                              2 ==
+                                                                          0)
+                                                                      ? AppConstants
+                                                                          .severityMinor
+                                                                      : (index % 3 ==
+                                                                              0)
+                                                                          ? AppConstants
+                                                                              .severityMajor
+                                                                          : AppConstants
+                                                                              .severityCritical),
                                                           child: Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -460,7 +468,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                                 valueStyle:
                                                                     TextStyle(
                                                                         fontSize:
-                                                                            20),
+                                                                            19),
                                                                 value:
                                                                     "Beverages",
                                                               ),
@@ -468,7 +476,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                                 ',',
                                                                 style: TextStyle(
                                                                     fontSize:
-                                                                        20),
+                                                                        19),
                                                               ),
                                                               TicketText(
                                                                 islabelrequired:
@@ -477,7 +485,7 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                                 valueStyle:
                                                                     TextStyle(
                                                                         fontSize:
-                                                                            20),
+                                                                            19),
                                                                 value:
                                                                     "Hudson Square",
                                                               ),

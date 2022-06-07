@@ -16,7 +16,7 @@ class DetailedTicketText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: MediaQuery.of(context).size.height / 15,
       color: color,
       child: Row(
         children: [
@@ -25,7 +25,10 @@ class DetailedTicketText extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(label, style: const TextStyle(fontSize: 20)),
+                Text(
+                  label,
+                  style: const TextStyle(fontSize: 18),
+                ),
               ],
             ),
           ),
@@ -36,7 +39,7 @@ class DetailedTicketText extends StatelessWidget {
                 Text(
                   value,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:idec_face/screens/settings_screen.dart';
 import 'package:intl/intl.dart';
@@ -38,21 +39,29 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = ref.watch(navigationbarNotifier).selectionIndex;
+    final GlobalKey<ScaffoldState> _scaffholdKey = GlobalKey<ScaffoldState>();
     return FutureBuilder(
         future: getAppName(),
         builder: (context, snapshot) {
           return Scaffold(
+            key: _scaffholdKey,
             drawer: const MyDrawer(),
             appBar: AppBar(
               backgroundColor: AppConstants.primaryColor,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              centerTitle: true,
+              title: Text(appbartitle[selectedIndex]),
+              leading: Row(
                 children: [
-                  const SizedBox(width: 50),
-                  Text(appbartitle[selectedIndex]),
+                  IconButton(
+                      onPressed: () => _scaffholdKey.currentState!.openDrawer(),
+                      icon: const Icon(Icons.menu)),
+                  SvgPicture.asset(
+                    'assets/svg/logoNotext.svg',
+                    height: 35,
+                  )
                 ],
               ),
-              // leading: SvgPicture.asset('assets/svg/logo.svg'),
+              leadingWidth: 100,
               actions: [
                 Align(
                     alignment: Alignment.bottomRight,

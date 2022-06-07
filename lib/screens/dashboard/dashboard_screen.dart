@@ -1,5 +1,6 @@
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../custom_widgets/custom_selection.dart';
 import '../../custom_widgets/liquid_progress_bar.dart';
@@ -106,7 +107,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(left: 10),
+                      margin: const EdgeInsets.only(left: 5),
                       // decoration: BoxDecoration(
                       //   border: Border(
                       //     bottom: BorderSide(width: 1.0, color: Colors.black),
@@ -121,7 +122,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     Container(
                       margin: const EdgeInsets.all(10),
                       child: CustomSelectionBar(
-                        isSortIconNeeded: true,
+                        isSortIconNeeded: false,
                         circleSuffixIcon: false,
                         isConfigreceived: false,
                         isSvg: false,
@@ -135,6 +136,13 @@ class _DashboardPageState extends State<DashboardPage> {
                         searchController: _scoreSearchController,
                       ),
                     ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(
+                        "assets/svg/sort.svg",
+                        height: 25,
+                      ),
+                    )
                   ],
                 ),
                 Expanded(
@@ -170,8 +178,16 @@ class _DashboardPageState extends State<DashboardPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: const [
-                                          Text('Hudson Square'),
-                                          Text('5.5')
+                                          Text(
+                                            'Hudson Square',
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          Text(
+                                            '5.5',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          )
                                         ],
                                       ),
                                     ],
