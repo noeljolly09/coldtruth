@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:idec_face/constants.dart';
+import 'package:idec_face/custom_widgets/alerts/alerts_progressbar_title.dart';
+import 'package:idec_face/custom_widgets/alerts/custom_progress_bar.dart';
+import 'package:idec_face/custom_widgets/custom_selection.dart';
+import 'package:idec_face/custom_widgets/ticket/ticket_card.dart';
+import 'package:idec_face/dialogs/info_dialog/dialog_with_timer.dart';
 import 'package:idec_face/screens/events_screens/incidents/incidents_screen.dart';
 
-import '../../constants.dart';
-import '../../custom_widgets/custom_progress_bar.dart';
-import '../../custom_widgets/custom_selection.dart';
-import '../../custom_widgets/ticket/ticket_text.dart';
-import '../../dialogs/info_dialog/dialog_with_timer.dart';
 import 'alerts/detailed_alert_screen.dart';
 
 class AlertsPage extends ConsumerStatefulWidget {
@@ -37,18 +38,14 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
 
   bool isSwitched = false;
 
-  var textValue = 'Inactive';
-
   void toggleSwitch(bool? value) {
     if (isSwitched == false) {
       setState(() {
         isSwitched = true;
-        textValue = '  Active';
       });
     } else {
       setState(() {
         isSwitched = false;
-        textValue = 'Inactive';
       });
     }
   }
@@ -145,85 +142,8 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: AppConstants
-                                                          .severityCritical,
-                                                    ),
-                                                    height: 10,
-                                                    width: 10,
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 3.0),
-                                                    child: Text(
-                                                      'Critical',
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: AppConstants
-                                                          .severityMajor,
-                                                    ),
-                                                    height: 10,
-                                                    width: 10,
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 3.0),
-                                                    child: Text(
-                                                      'Major',
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: AppConstants
-                                                          .severityMinor,
-                                                    ),
-                                                    height: 10,
-                                                    width: 10,
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 3.0),
-                                                    child: Text(
-                                                      'Minor',
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                        const Expanded(
+                                          child: AlertProgressBarTitle(),
                                         ),
                                         Container(
                                           margin:
@@ -369,136 +289,8 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                                                 );
                                               }
                                             },
-                                            child: Card(
-                                              margin: const EdgeInsets.all(1),
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    5.5,
-                                                color: Colors.white,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.arrow_left,
-                                                    ),
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        const TicketText(
-                                                          islabelrequired: true,
-                                                          isSameAsLabelStyle:
-                                                              true,
-                                                          label: "Ticket No :",
-                                                          value: "1100224",
-                                                          withlabelStyle:
-                                                              TextStyle(
-                                                                  fontSize: 23,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                        ),
-                                                        const TicketText(
-                                                          islabelrequired:
-                                                              false,
-                                                          label: "",
-                                                          value:
-                                                              "10:00, 23March 2022",
-                                                        ),
-                                                        TicketText(
-                                                          islabelrequired: true,
-                                                          isSameAsLabelStyle:
-                                                              false,
-                                                          isIconNeeded: true,
-                                                          icon:
-                                                              SvgPicture.asset(
-                                                            'assets/svg/clock.svg',
-                                                            height: 20,
-                                                          ),
-                                                          label:
-                                                              " Active Since:",
-                                                          value: "17 Min",
-                                                          valueStyle: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .primaryColor),
-                                                        ),
-                                                        Container(
-                                                          height: 35,
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              1.4,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              18),
-                                                                  color: (index %
-                                                                              2 ==
-                                                                          0)
-                                                                      ? AppConstants
-                                                                          .severityMinor
-                                                                      : (index % 3 ==
-                                                                              0)
-                                                                          ? AppConstants
-                                                                              .severityMajor
-                                                                          : AppConstants
-                                                                              .severityCritical),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: const [
-                                                              TicketText(
-                                                                islabelrequired:
-                                                                    false,
-                                                                label: "",
-                                                                valueStyle:
-                                                                    TextStyle(
-                                                                        fontSize:
-                                                                            19),
-                                                                value:
-                                                                    "Beverages",
-                                                              ),
-                                                              Text(
-                                                                ',',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        19),
-                                                              ),
-                                                              TicketText(
-                                                                islabelrequired:
-                                                                    false,
-                                                                label: "",
-                                                                valueStyle:
-                                                                    TextStyle(
-                                                                        fontSize:
-                                                                            19),
-                                                                value:
-                                                                    "Hudson Square",
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const Icon(
-                                                        Icons.arrow_right),
-                                                  ],
-                                                ),
-                                              ),
+                                            child: TicketCard(
+                                              index: index,
                                             ),
                                           ),
                                         ),
@@ -508,7 +300,6 @@ class _NotificationsPageState extends ConsumerState<AlertsPage> {
                             ),
                           ],
                         ),
-
                         // second tab bar viiew widget
                         const IncidentsPage(),
                       ],

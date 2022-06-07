@@ -1,7 +1,7 @@
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:idec_face/custom_widgets/country_code_picker.dart';
+import 'package:idec_face/screens/registration/widgets/country_code_picker.dart';
 
 import '../../../constants.dart';
 import '../../../custom_widgets/text.dart';
