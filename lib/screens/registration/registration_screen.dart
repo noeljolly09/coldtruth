@@ -56,6 +56,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
   final TextEditingController _bloodController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _commentsController = TextEditingController();
 
   @override
   void initState() {
@@ -149,6 +150,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                               _bloodController,
                               _phoneController,
                               _emailController,
+                              _commentsController,
                               formHeader: "Preview Page");
                         } else {
                           openDialogWindow(
@@ -164,7 +166,8 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                               _nationalityController,
                               _bloodController,
                               _phoneController,
-                              _emailController);
+                              _emailController,
+                              _commentsController);
                         }
                       },
                       icon: SvgPicture.asset(
@@ -174,7 +177,8 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                     )
                   ],
                 ),
-                Expanded(
+                Flexible(
+                  flex: 3,
                   child: PageView(
                     controller: controller,
                     onPageChanged: (index) {
@@ -209,12 +213,14 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                         emailValidate: customValidator,
                         emailController: _emailController,
                         phoneController: _phoneController,
+                        commentsController: _commentsController,
                       ),
                     ],
                   ),
                 ),
                 isPageChanged == 3
                     ? Flexible(
+                        flex: 1,
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width / 2,
                           child: CustomButton(
@@ -244,6 +250,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                                   _bloodController,
                                   _phoneController,
                                   _emailController,
+                                  _commentsController,
                                   formHeader: "Validation Error!",
                                 );
                               } else {

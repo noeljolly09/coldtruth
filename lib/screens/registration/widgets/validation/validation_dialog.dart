@@ -21,6 +21,7 @@ openValidationDialogWindow(
     TextEditingController blood,
     TextEditingController phone,
     TextEditingController email,
+    TextEditingController comments,
     {required String formHeader}) {
   showDialog(
       context: context,
@@ -138,6 +139,11 @@ openValidationDialogWindow(
                       validationErrorText: email.text.isValidEmail,
                       titletext: "Email",
                       controllertext: email.text,
+                    ),
+                    PreviewText(
+                      assetName: "assets/svg/comments.svg",
+                      titletext: "Comments",
+                      controllertext: comments.text,
                     ),
                   ],
                 ),

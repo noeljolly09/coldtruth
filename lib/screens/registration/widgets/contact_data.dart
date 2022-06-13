@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:idec_face/screens/registration/widgets/country_code_picker.dart';
 
 import '../../../constants.dart';
@@ -11,6 +13,7 @@ import '../../../custom_widgets/textfields/text_icon_only_textfield.dart';
 class ContactPageRegistration extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController phoneController;
+  final TextEditingController commentsController;
   final String? Function(String?)? emailValidate;
   final String? Function(String?)? phoneNumberValidate;
 
@@ -20,6 +23,7 @@ class ContactPageRegistration extends StatelessWidget {
     Key? key,
     required this.emailController,
     required this.phoneController,
+    required this.commentsController,
     this.emailValidate,
     this.phoneNumberValidate,
     required this.onchanged,
@@ -112,6 +116,45 @@ class ContactPageRegistration extends StatelessWidget {
                               textAction: TextInputAction.done,
                             ),
                           ],
+                        ),
+                      ),
+                      SizedBox(height: height30),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        child: TextFormField(
+                          style: TextStyle(
+                            fontSize: AppConstants.formtextsize,
+                            fontStyle: FontStyle.normal,
+                          ),
+                          controller: commentsController,
+                          decoration: InputDecoration(
+                              label: const Text("Comments"),
+                              labelStyle:
+                                  TextStyle(color: AppConstants.labeltextgrey),
+                              floatingLabelStyle: const TextStyle(
+                                  color: AppConstants.customblack),
+                              contentPadding: const EdgeInsets.only(bottom: 5),
+                              prefixIconConstraints: const BoxConstraints(
+                                  maxHeight: 30, maxWidth: 30),
+                              prefixIcon: Container(
+                                margin: const EdgeInsets.all(2),
+                                child: SvgPicture.asset(
+                                  "assets/svg/comments.svg",
+                                  color: AppConstants.customblack,
+                                  alignment: Alignment.center,
+                                ),
+                              ),
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppConstants.secondaryColor),
+                              )),
+                          keyboardType: TextInputType.multiline,
+                          textInputAction: TextInputAction.done,
+                          textAlign: TextAlign.start,
+                          maxLines: 3,
                         ),
                       ),
                     ],
