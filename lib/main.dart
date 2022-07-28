@@ -6,7 +6,6 @@ import 'package:idec_face/screens/forgot_password.dart';
 import 'package:idec_face/screens/login/login_screen.dart';
 import 'package:idec_face/screens/registration/registration_screen.dart';
 
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:idec_face/screens/settings_screen.dart';
 
